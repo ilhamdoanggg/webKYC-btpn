@@ -1,10 +1,6 @@
 module.exports = (app, passport) => {
   app.get('/signup', (req, res) => {
-    res.render('signup');
-  });
-
-  app.get('/signin', (req, res) => {
-    res.render('signin');
+    res.render('pages/signup');
   });
 
   app.post(
@@ -15,10 +11,8 @@ module.exports = (app, passport) => {
     })
   );
 
-  app.get('/logout', (req, res) => {
-    req.session.destroy(err => {
-      res.redirect('/');
-    });
+  app.get('/signin', (req, res) => {
+    res.render('pages/login');
   });
 
   app.post(
@@ -29,9 +23,11 @@ module.exports = (app, passport) => {
     })
   );
 
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
+  app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+      res.redirect('/');
+    });
+  });
 
-    res.redirect('/signin');
-  }
+  
 };
