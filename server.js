@@ -41,8 +41,8 @@ const models = require('./models');
 app.use(express.static("public"));
 
 // Routes
-require('./controllers/auth.js')(app, passport);
-require('./controllers/home.js')(app, passport);
+require('./controllers/auth.controller.js')(app, passport);
+require('./controllers/view.controller.js')(app, passport);
 // Load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
 
