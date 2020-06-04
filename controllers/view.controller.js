@@ -31,6 +31,29 @@ module.exports = (app, passport) => {
     res.render('pages/videocall-confirmation');
   });
 
+  app.get('/audit-trail', isLoggedIn, (req, res) => {
+    res.render('pages/audit-trail');
+  });
+
+  app.get('/disbursement', isLoggedIn, (req, res) => {
+    res.render('pages/disbursement');
+  });
+  app.get('/disbursement-input', isLoggedIn, (req, res) => {
+    res.render('pages/disbursement-input');
+  });
+
+  app.get('/monitoring', isLoggedIn, (req, res) => {
+    res.render('pages/monitoring');
+  });
+
+  app.get('/videocall-verification', isLoggedIn, (req, res) => {
+    res.render('pages/videocall-verification');
+  });
+
+  app.get('/verification', isLoggedIn, (req, res) => {
+    res.render('pages/verification');
+  });
+
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
 
