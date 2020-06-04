@@ -1,0 +1,186 @@
+{{> header}}
+<div class="container" style="margin-top: 90px;">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="text-right">Selamat Datang, aloel Dev</h5>
+        </div>
+    </div>
+    <h1 class="text-center">Monitoring</h1>
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-3">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the card's
+                        content.</p>
+                </div>
+                <div class="card-footer bg-primary">Footer</div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the card's
+                        content.</p>
+                </div>
+                <div class="card-footer bg-success">Footer</div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the card's
+                        content.</p>
+                </div>
+                <div class="card-footer bg-warning">Footer</div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the card's
+                        content.</p>
+                </div>
+                <div class="card-footer bg-danger">Footer</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Direct
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> Social
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Referral
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Nopen</th>
+                    <th scope="col">No telp</th>
+                    <th scope="col">PIC</th>
+                    <th scope="col">Actions date (strat)</th>
+                    <th scope="col">Actions date (end)</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Andi</td>
+                    <td>1231312323</td>
+                    <td>1231312323</td>
+                    <td>SMO</td>
+                    <td>date</td>
+                    <td>date</td>
+                    <td>
+                        <button class="btn btn-link"> Offering - pre confirm </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Andi</td>
+                    <td>1231312323</td>
+                    <td>1231312323</td>
+                    <td>SMO</td>
+                    <td>date</td>
+                    <td>date</td>
+                    <td>
+                        <button class="btn btn-link"> Konfirmasi Awal </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Andi</td>
+                    <td>1231312323</td>
+                    <td>1231312323</td>
+                    <td>SMO</td>
+                    <td>date</td>
+                    <td>date</td>
+                    <td>
+                        <button class="btn btn-link"> Request SLIK Checking</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container mt-3">
+    <a href="/audit-trail" class="btn btn-link"> <i class="far fa-eye"></i> View Audit trail</a>
+</div>
+{{> footer}}

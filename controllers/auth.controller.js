@@ -1,3 +1,5 @@
+const {getRedirectUrl} = require('../utils/auth');
+
 module.exports = (app, passport) => {
   app.get('/signup', (req, res) => {
     res.render('pages/signup');
@@ -6,9 +8,10 @@ module.exports = (app, passport) => {
   app.post(
     '/signup',
     passport.authenticate('local-signup', {
-      successRedirect: '/home',
-      failureRedirect: '/signup'
-    })
+      failureRedirect: '/signin'
+    }), (req, res) => {
+      res.redirect(getRedirectUrl(req.user.role));
+    }
   );
 
   app.get('/signin', (req, res) => {
@@ -18,9 +21,10 @@ module.exports = (app, passport) => {
   app.post(
     '/signin',
     passport.authenticate('local-signin', {
-      successRedirect: '/home',
       failureRedirect: '/signin'
-    })
+    }), (req, res) => {
+      res.redirect(getRedirectUrl(req.user.role));
+    }
   );
 
   app.get('/logout', (req, res) => {
