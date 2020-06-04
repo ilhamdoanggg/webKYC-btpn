@@ -33,4 +33,27 @@ module.exports = (app, passport) => {
   app.get('/sales/videocall-confirmation', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
     res.render('pages/videocall-confirmation');
   });
+  
+  app.get('/sales/audit-trail', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+    res.render('pages/audit-trail');
+  });
+
+  app.get('/sales/disbursement', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+    res.render('pages/disbursement');
+  });
+  app.get('/sales/disbursement-input', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+    res.render('pages/disbursement-input');
+  });
+
+  app.get('/sales/monitoring', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+    res.render('pages/monitoring');
+  });
+
+  app.get('/sales/videocall-verification', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+    res.render('pages/videocall-verification');
+  });
+
+  app.get('/sales/verification', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+    res.render('pages/verification');
+  });
 };
