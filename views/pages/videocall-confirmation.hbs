@@ -37,18 +37,18 @@
     <div class="row mx-3 mt-3">
         <div class="col-sm-12 col-md-8 border py-3">
             <div class="row">
-                <div class="col-sm-12 col-md-8">
-                    <video class="embed-responsive" width="470" height="600" autoplay controls></video>
+                <div id="container-video" class="col-sm-12 col-md-8">
+
                 </div>
-                <div class="col-sm-12 col-md-4">
+                {{!-- <div class="col-sm-12 col-md-4">
                     <video class="embed-responsive" width="200" height="200" autoplay controls></video>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="col-sm-12 col-md-4 border">
             <h3 class="text-center">Tools</h3>
-            <button class="btn btn-warning btn-block">Video Call</button>
-            <button class="btn btn-warning btn-block">Screen Capture</button>
+            <button id="btn-open-room" class="btn btn-warning btn-block">Video Call</button>
+            <button id="btn-join-room" class="btn btn-warning btn-block">Join Video</button>
             <button class="btn btn-warning btn-block">Send File</button>
             <button class="btn btn-warning btn-block">Pen</button>
             <button class="btn btn-warning btn-block">Documents</button>
