@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "root",
-    "database": "webKYC",
-    "host": "127.0.0.1",
+    "username": "suheatgxenhjeb",
+    "password": "9679c23e85aca0aba6f2f249807f3a46b3be32b3bef73de8c1e4909ec029c61a",
+    "database": "d2p8npm7r7kemk",
+    "host": "ec2-52-202-22-140.compute-1.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {
