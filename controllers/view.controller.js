@@ -58,7 +58,7 @@ module.exports = (app, passport) => {
   });
 
   // Debitur
-  app.get('/debitur/', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+  app.get('/debitur', isLoggedIn, checkIsInRole(ROLES.Debitur), (req, res) => {
     res.render('pages/ui-debitur');
   });
 };
