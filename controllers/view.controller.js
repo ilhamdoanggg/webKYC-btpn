@@ -30,7 +30,7 @@ module.exports = (app, passport) => {
     res.render('pages/slik-checking');
   });
 
-  app.get('/sales/videocall-confirmation', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+  app.get('/sales/videocall-confirmation', (req, res) => {
     res.render('pages/videocall-confirmation');
   });
 
@@ -58,7 +58,7 @@ module.exports = (app, passport) => {
   });
 
   // Debitur
-  app.get('/debitur', isLoggedIn, checkIsInRole(ROLES.Debitur), (req, res) => {
+  app.get('/debitur', (req, res) => {
     res.render('pages/ui-debitur');
   });
 };
