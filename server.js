@@ -6,6 +6,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 require('dotenv').load();
 const exphbs = require('express-handlebars');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const stream = require('./utils/stream');
 
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,14 +50,16 @@ require('./controllers/view.controller.js')(app, passport);
 require('./config/passport/passport.js')(passport, models.user);
 
 // Initialize port
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 9000
 
 // Sync Database
 models.sequelize
   .sync()
   .then(function() {
-    app.listen(port, function(err) {
-      if (!err) console.log('Connected at http://localhost:3000');
+    io.of('/stream').on('connection', stream);
+
+    server.listen(port, function(err) {
+      if (!err) console.log(`Connected at http://localhost:${port}`);
       else console.log(err);
     });
   })

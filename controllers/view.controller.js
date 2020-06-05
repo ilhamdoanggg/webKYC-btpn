@@ -1,5 +1,5 @@
 const ROLES = require('../utils/roles');
-const {checkIsInRole, isLoggedIn} = require('../utils/auth');
+const { checkIsInRole, isLoggedIn } = require('../utils/auth');
 
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
@@ -30,10 +30,10 @@ module.exports = (app, passport) => {
     res.render('pages/slik-checking');
   });
 
-  app.get('/sales/videocall-confirmation', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
+  app.get('/sales/videocall-confirmation', (req, res) => {
     res.render('pages/videocall-confirmation');
   });
-  
+
   app.get('/sales/audit-trail', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
     res.render('pages/audit-trail');
   });
@@ -55,5 +55,10 @@ module.exports = (app, passport) => {
 
   app.get('/sales/verification', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
     res.render('pages/verification');
+  });
+
+  // Debitur
+  app.get('/debitur', (req, res) => {
+    res.render('pages/ui-debitur');
   });
 };
