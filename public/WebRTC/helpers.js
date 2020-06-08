@@ -7,7 +7,6 @@ export default {
     closeVideo( elemId ) {
         if ( document.getElementById( elemId ) ) {
             document.getElementById( elemId ).remove();
-            this.adjustVideoElemSize();
         }
     },
 
