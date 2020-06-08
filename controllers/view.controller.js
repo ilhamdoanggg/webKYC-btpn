@@ -1,5 +1,6 @@
 const ROLES = require('../utils/roles');
 const { checkIsInRole, isLoggedIn } = require('../utils/auth');
+// const sendNotifMessage = require('../utils/sendNotifMessage');
 
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
@@ -32,6 +33,16 @@ module.exports = (app, passport) => {
 
   app.get('/sales/videocall-confirmation', (req, res) => {
     res.render('pages/videocall-confirmation');
+
+
+    // example use sendNotifMessage
+    // const data = {
+    //   number: "debitur number",
+    //   link: "https://webkyc-btpn.herokuapp.com/sales/videocall-confirmation?room=hello@email.com_p2lzfnoypt"
+    // }
+    // sendNotifMessage(data);
+
+
   });
 
   app.get('/sales/audit-trail', isLoggedIn, checkIsInRole(ROLES.Sales), (req, res) => {
