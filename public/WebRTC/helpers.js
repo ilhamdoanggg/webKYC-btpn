@@ -118,61 +118,6 @@ export default {
         };
     },
 
-
-    addChat( data, senderType ) {
-        let chatMsgDiv = document.querySelector( '#chat-messages' );
-        let contentAlign = 'justify-content-end';
-        let senderName = 'You';
-        let msgBg = 'bg-white';
-
-        if ( senderType === 'remote' ) {
-            contentAlign = 'justify-content-start';
-            senderName = data.sender;
-            msgBg = '';
-
-            this.toggleChatNotificationBadge();
-        }
-
-        let infoDiv = document.createElement( 'div' );
-        infoDiv.className = 'sender-info';
-        infoDiv.innerHTML = `${ senderName } - ${ moment().format( 'Do MMMM, YYYY h:mm a' ) }`;
-
-        let colDiv = document.createElement( 'div' );
-        colDiv.className = `col-10 card chat-card msg ${ msgBg }`;
-        colDiv.innerHTML = data.msg;
-
-        let rowDiv = document.createElement( 'div' );
-        rowDiv.className = `row ${ contentAlign } mb-2`;
-
-
-        colDiv.appendChild( infoDiv );
-        rowDiv.appendChild( colDiv );
-
-        chatMsgDiv.appendChild( rowDiv );
-
-        /**
-         * Move focus to the newly added message but only if:
-         * 1. Page has focus
-         * 2. User has not moved scrollbar upward. This is to prevent moving the scroll position if user is reading previous messages.
-         */
-        if ( this.pageHasFocus ) {
-            rowDiv.scrollIntoView();
-        }
-    },
-
-
-    toggleChatNotificationBadge() {
-        if ( document.querySelector( '#chat-pane' ).classList.contains( 'chat-opened' ) ) {
-            document.querySelector( '#new-chat-notification' ).setAttribute( 'hidden', true );
-        }
-
-        else {
-            document.querySelector( '#new-chat-notification' ).removeAttribute( 'hidden' );
-        }
-    },
-
-
-
     replaceTrack( stream, recipientPeer ) {
         let sender = recipientPeer.getSenders ? recipientPeer.getSenders().find( s => s.track && s.track.kind === stream.kind ) : false;
 
@@ -269,38 +214,4 @@ export default {
         localVidElem.srcObject = stream;
         mirrorMode ? localVidElem.classList.add( 'mirror-mode' ) : localVidElem.classList.remove( 'mirror-mode' );
     },
-
-    createDemoRemotes( str, total = 6 ) {
-        let i = 0;
-
-        let testInterval = setInterval( () => {
-            let newVid = document.createElement( 'video' );
-            newVid.id = `demo-${ i }-video`;
-            newVid.srcObject = str;
-            newVid.autoplay = true;
-            newVid.className = 'remote-video';
-
-            //video controls elements
-            let controlDiv = document.createElement( 'div' );
-            controlDiv.className = 'remote-video-controls';
-            controlDiv.innerHTML = `<i class="fa fa-microphone text-white pr-3 mute-remote-mic" title="Mute"></i>
-                <i class="fa fa-expand text-white expand-remote-video" title="Expand"></i>`;
-
-            //create a new div for card
-            let cardDiv = document.createElement( 'div' );
-            cardDiv.className = 'card card-sm';
-            cardDiv.id = `demo-${ i }`;
-            cardDiv.appendChild( newVid );
-            cardDiv.appendChild( controlDiv );
-
-            //put div in main-section elem
-            document.getElementById( 'videos' ).appendChild( cardDiv );
-
-            i++;
-
-            if ( i == total ) {
-                clearInterval( testInterval );
-            }
-        }, 2000 );
-    }
 };
