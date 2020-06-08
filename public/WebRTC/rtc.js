@@ -116,23 +116,6 @@ window.addEventListener( 'load', () => {
         }
 
 
-        function sendMsg( msg ) {
-            let data = {
-                room: room,
-                msg: msg,
-                sender: username
-            };
-
-            //emit chat message
-            socket.emit( 'chat', data );
-
-
-            //add localchat
-            h.addChat( data, 'local' );
-        }
-
-
-
         function init( createOffer, partnerName ) {
             pc[partnerName] = new RTCPeerConnection( h.getIceServer() );
 
@@ -200,23 +183,14 @@ window.addEventListener( 'load', () => {
                     newVid.autoplay = true;
                     newVid.className = 'remote-video mirror-mode';
 
-                    //video controls elements
-                    let controlDiv = document.createElement( 'div' );
-                    controlDiv.className = 'remote-video-controls';
-                    controlDiv.innerHTML = `<i class="fa fa-microphone text-white pr-3 mute-remote-mic" title="Mute"></i>
-                        <i class="fa fa-expand text-white expand-remote-video" title="Expand"></i>`;
-
                     //create a new div for card
                     let cardDiv = document.createElement( 'div' );
                     cardDiv.className = 'card card-sm';
                     cardDiv.id = partnerName;
                     cardDiv.appendChild( newVid );
-                    cardDiv.appendChild( controlDiv );
 
                     //put div in main-section elem
                     document.getElementById( 'videos' ).appendChild( cardDiv );
-
-                    h.adjustVideoElemSize();
                 }
             };
 
@@ -350,21 +324,6 @@ window.addEventListener( 'load', () => {
                 console.error( e );
             };
         }
-
-
-        //Chat textarea
-        document.getElementById( 'chat-input' ).addEventListener( 'keypress', ( e ) => {
-            if ( e.which === 13 && ( e.target.value.trim() ) ) {
-                e.preventDefault();
-
-                sendMsg( e.target.value );
-
-                setTimeout( () => {
-                    e.target.value = '';
-                }, 50 );
-            }
-        } );
-
 
         //When the video icon is clicked
         document.getElementById( 'toggle-video' ).addEventListener( 'click', ( e ) => {
