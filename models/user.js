@@ -3,9 +3,10 @@ const ROLES = require('../utils/roles');
 module.exports = (sequelize, Sequelize) => {
   var User = sequelize.define('user', {
     id: { 
-      autoIncrement: true, 
+      allowNull: false,
       primaryKey: true, 
-      type: Sequelize.INTEGER 
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4
     },
     firstname: { 
       type: Sequelize.STRING, 

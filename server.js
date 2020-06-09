@@ -50,7 +50,7 @@ require('./controllers/view.controller.js')(app, passport);
 require('./config/passport/passport.js')(passport, models.user);
 
 // Initialize port
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 3000
 
 // Sync Database
 models.sequelize
