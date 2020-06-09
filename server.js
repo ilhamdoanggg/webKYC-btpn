@@ -42,6 +42,7 @@ const models = require('./models');
 
 // Express static assets
 app.use(express.static("public"));
+app.use('/canvas-designer', express.static('node_modules/canvas-designer/'));
 
 // Routes
 require('./controllers/auth.controller.js')(app, passport);
@@ -55,14 +56,14 @@ const port = process.env.PORT || 9000
 // Sync Database
 models.sequelize
   .sync()
-  .then(function() {
+  .then(function () {
     io.of('/stream').on('connection', stream);
 
-    server.listen(port, function(err) {
+    server.listen(port, function (err) {
       if (!err) console.log(`Connected at http://localhost:${port}`);
       else console.log(err);
     });
   })
-  .catch(function(err) {
+  .catch(function (err) {
     console.log(err, 'Error on Database Sync. Please try again!');
   });
