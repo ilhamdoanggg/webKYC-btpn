@@ -20,6 +20,10 @@
                 <button class="btn btn-sm rounded-0 btn-no-effect" id='toggle-mute' title="Mute">
                     <i class="fa fa-microphone-alt text-white"></i>
                 </button>
+
+                <button class="btn btn-sm text-white pull-right btn-no-effect" id='toggle-chat-pane'>
+                    <i class="fa fa-comment"></i> <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification' hidden>New</span>
+                </button>
             </div>
         </div>
         <div class="col-md-4 border">
@@ -41,27 +45,7 @@
         <div class="row">
             <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..."></textarea>
         </div>
-    </div>
-
-    <div class="custom-modal" id='recording-options-modal'>
-        <div class="custom-modal-content">
-            <div class="row text-center">
-                <div class="col-md-6 mb-2">
-                    <span class="record-option" id='record-video'>Record video</span>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <span class="record-option" id='record-screen'>Record screen</span>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12 text-center">
-                    <button class="btn btn-outline-danger" id='closeModal'>Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        
+    </div>   
         
         <div class="container-fluid" id='room-create' hidden>
             <div class="row">
