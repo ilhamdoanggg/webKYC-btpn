@@ -15,13 +15,14 @@ module.exports = (app, passport) => {
   );
 
   app.get('/signin', (req, res) => {
-    res.render('pages/login');
+    res.render('pages/login', { message: req.flash('error')});
   });
 
   app.post(
     '/signin',
     passport.authenticate('local-signin', {
-      failureRedirect: '/signin'
+      failureRedirect: '/signin',
+      failureFlash: true
     }), (req, res) => {
       res.redirect(getRedirectUrl(req.user.role));
     }

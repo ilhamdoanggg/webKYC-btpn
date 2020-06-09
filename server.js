@@ -9,10 +9,14 @@ const exphbs = require('express-handlebars');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const stream = require('./utils/stream');
+const flash = require('connect-flash');
 
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Connect Flash
+app.use(flash());
 
 // Passport
 app.use(

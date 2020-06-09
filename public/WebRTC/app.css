@@ -1,8 +1,7 @@
 .chat-col{
     right: -100vw;
     bottom: 0;
-    top: 40.5px;
-    z-index: 1000;
+    z-index: 20000;
     position: fixed;
     color: #fff;
     padding-right: 5px;
