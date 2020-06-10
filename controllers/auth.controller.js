@@ -1,6 +1,13 @@
 const {getRedirectUrl} = require('../utils/auth');
 
 module.exports = (app, passport) => {
+  app.get('/', (req, res) => {
+    if (req.isAuthenticated()) {
+      return res.redirect(getRedirectUrl(req.user.role));
+    } 
+    res.redirect('/signin');
+  });
+
   app.get('/signup', (req, res) => {
     res.render('pages/signup');
   });
@@ -15,6 +22,9 @@ module.exports = (app, passport) => {
   );
 
   app.get('/signin', (req, res) => {
+    if (req.isAuthenticated()) {
+      return res.redirect(getRedirectUrl(req.user.role));
+    }
     res.render('pages/login', { message: req.flash('error')});
   });
 
