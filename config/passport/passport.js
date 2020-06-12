@@ -44,8 +44,8 @@ module.exports = (passport, user) => {
             var data = {
               email: email,
               password: userPassword,
-              firstname: req.body.firstname,
-              lastname: req.body.lastname,
+              firstName: req.body.firstname,
+              lastName: req.body.lastname,
               role: req.body.role == "" ? 2 : req.body.role
             };
 

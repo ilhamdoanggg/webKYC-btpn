@@ -50,6 +50,7 @@ app.use(express.static("public"));
 // Routes
 require('./controllers/auth.controller.js')(app, passport);
 require('./controllers/view.controller.js')(app, passport);
+require('./controllers/customer.controller')(app);
 // Load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
 

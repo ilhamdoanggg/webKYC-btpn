@@ -16,12 +16,8 @@ const checkIsInRole = (...roles) => (req, res, next) => {
 
 const getRedirectUrl = role => {
     switch (role) {
-        case ROLES.Sales:
-            return '/sales/home';
-        case ROLES.Debitur:
-            return '/debitur/';
         default:
-            return '/';
+            return '/sales/home';
     }
 }
 

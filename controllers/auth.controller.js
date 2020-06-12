@@ -8,19 +8,6 @@ module.exports = (app, passport) => {
     res.redirect('/signin');
   });
 
-  app.get('/signup', (req, res) => {
-    res.render('pages/signup');
-  });
-
-  app.post(
-    '/signup',
-    passport.authenticate('local-signup', {
-      failureRedirect: '/signin'
-    }), (req, res) => {
-      res.redirect(getRedirectUrl(req.user.role));
-    }
-  );
-
   app.get('/signin', (req, res) => {
     if (req.isAuthenticated()) {
       return res.redirect(getRedirectUrl(req.user.role));
