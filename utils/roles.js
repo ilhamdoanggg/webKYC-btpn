@@ -1,6 +1,7 @@
 const ROLES = {
-    Sales: 1,
-    Debitur: 2
+    Admin: 1,
+    Manager: 2,
+    Sales: 3
 }
 
 module.exports = ROLES;
