@@ -41,6 +41,11 @@ const exphbsConfig = exphbs.create({
 app.engine('hbs', exphbsConfig.engine);
 app.set('view engine', '.hbs');
 
+// make counter handlebars
+exphbsConfig.handlebars.registerHelper("counter", function (index) {
+  return index + 1;
+});
+
 // Models
 const models = require('./models');
 
@@ -60,14 +65,14 @@ const port = process.env.PORT || 3000
 // Sync Database
 models.sequelize
   .sync()
-  .then(function() {
+  .then(function () {
     io.of('/stream').on('connection', stream);
 
-    server.listen(port, function(err) {
+    server.listen(port, function (err) {
       if (!err) console.log(`Connected at http://localhost:${port}`);
       else console.log(err);
     });
   })
-  .catch(function(err) {
+  .catch(function (err) {
     console.log(err, 'Error on Database Sync. Please try again!');
   });
