@@ -3,11 +3,14 @@
 <div class="container">
     <div class="row mx-3">
         <div class="col-md-8 border px-0">
-            <div class="room-comm" style="min-height: 500px;" hidden>
+            <div class="room-comm" style="min-height: 500px;" hidden id="wrapper-camera">
                 <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
                 <div id='main-section'>                    
-                    <div class="wrapper-remote-video" id='videos'></div>
+                    <div class="wrapper-remote-video mirror-mode" id='videos'></div>
                 </div>
+            </div>
+            <div class="room-comm" style="min-height: 500px;" hidden>
+                <div id="canvas-container"></div>
             </div>
             <div class="room-comm tools" hidden>
                 <button class="btn btn-sm rounded-0 btn-no-effect" id='toggle-video' title="Hide Video">
@@ -35,7 +38,7 @@
             <h3 class="text-center">Tools</h3>
             <button class="btn btn-warning btn-block">Video Call</button>
             <button class="btn btn-warning btn-block">Send File</button>
-            <button class="btn btn-warning btn-block">Pen</button>
+            <button class="btn btn-warning btn-block" id="btn-pen">Pen</button>
             <button class="btn btn-warning btn-block">Request End Call</button>
         </div>
     </div>
@@ -120,4 +123,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
+<script src="/Canvas/canvas-designer-widget.js"></script>
+<script src="/Canvas/canvas-designer.js"></script>
+<script>
+    sessionStorage.setItem('name', `{{user.firstName}} {{user.lastName}}`)
+    sessionStorage.setItem('username', `Testing{{user.email}}`)
+</script>
+
 {{> footer}}

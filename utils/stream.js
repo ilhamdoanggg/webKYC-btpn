@@ -12,7 +12,6 @@ const stream = ( socket ) => {
         console.log( socket.rooms );
     } );
 
-
     socket.on( 'newUserStart', ( data ) => {
         socket.to( data.to ).emit( 'newUserStart', { sender: data.sender } );
     } );

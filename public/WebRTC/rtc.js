@@ -245,8 +245,6 @@ window.addEventListener( 'load', () => {
             };
         }
 
-
-
         function shareScreen() {
             h.shareScreen().then( ( stream ) => {
                 h.toggleShareIcons( true );

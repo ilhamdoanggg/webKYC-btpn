@@ -53,10 +53,9 @@ window.addEventListener( 'load', () => {
     document.getElementById( 'create-room' ).addEventListener( 'click', ( e ) => {
         e.preventDefault();
 
-        let roomName = document.querySelector( '#room-name' ).value;
         let yourName = document.querySelector( '#your-name' ).value;
 
-        if ( roomName && yourName ) {
+        if ( yourName ) {
             //remove error message, if any
             document.querySelector( '#err-msg' ).innerHTML = "";
 
@@ -64,14 +63,10 @@ window.addEventListener( 'load', () => {
             sessionStorage.setItem( 'username', yourName );
 
             //create room link
-            let roomLink = `${ location.origin }?room=${ roomName.trim().replace( ' ', '_' ) }_${ helpers.generateRandomString() }`;
-
-            //show message with link to room
-            document.querySelector( '#room-created' ).innerHTML = `Room successfully created. Click <a href='${ roomLink }'>here</a> to enter room. 
-                Share the room link with your partners.`;
-
+            let roomLink = `${ location.origin }/debitur?room=${ yourName.trim().replace( ' ', '_' ) }_${ helpers.generateRandomString() }`;
+            // console.log(roomLink);
+            window.location.replace(roomLink);
             //empty the values
-            document.querySelector( '#room-name' ).value = '';
             document.querySelector( '#your-name' ).value = '';
         }
 
