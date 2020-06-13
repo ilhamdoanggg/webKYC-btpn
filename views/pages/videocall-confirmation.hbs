@@ -9,7 +9,7 @@
                     <div class="wrapper-remote-video mirror-mode" id='videos'></div>
                 </div>
             </div>
-            <div class="room-comm" style="min-height: 500px;" hidden>
+            <div class="room-comm" hidden>
                 <div id="canvas-container"></div>
             </div>
             <div class="room-comm tools" hidden>
@@ -28,18 +28,35 @@
                 <button class="btn btn-sm rounded-0 btn-no-effect" id='record' title="Record">
                     <i class="fa fa-dot-circle text-white"></i>
                 </button>
-
-                <button class="btn btn-sm text-white pull-right btn-no-effect" id='toggle-chat-pane'>
-                    <i class="fa fa-comment"></i> <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification' hidden>New</span>
-                </button>
             </div>
         </div>
         <div class="col-md-4 border">
-            <h3 class="text-center">Tools</h3>
-            <button class="btn btn-warning btn-block">Video Call</button>
-            <button class="btn btn-warning btn-block">Send File</button>
-            <button class="btn btn-warning btn-block" id="btn-pen">Pen</button>
-            <button class="btn btn-warning btn-block">Request End Call</button>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-tools-tab" data-toggle="tab" href="#tab-tools" role="tab" aria-controls="tab-home" aria-selected="true">Tools</a>
+                    <a class="nav-item nav-link" id="nav-chat-tab" data-toggle="tab" href="#tab-chat" role="tab" aria-controls="tab-chat" aria-selected="false">Chat
+                         <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification' hidden>New</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="tab-tools" role="tabpanel" aria-labelledby="tab-tools">
+                    <div class="mt-2">
+                        <button class="btn btn-warning btn-block">Video Call</button>
+                        <button class="btn btn-warning btn-block">Send File</button>
+                        <button class="btn btn-warning btn-block" id="btn-pen">Pen</button>
+                        <button class="btn btn-warning btn-block">Request End Call</button> 
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-chat" role="tabpanel" aria-labelledby="tab-chat">
+                    <div class="mt-3" id='chat-pane'>
+                        <div id='chat-messages'></div>
+                        <div class="row">
+                            <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here... and press the enter"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -61,18 +78,6 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-3 chat-col d-print-none mb-2 bg-info" id='chat-pane' hidden>
-        <div class="row">
-            <div class="col-12 text-center h2 mb-3">CHAT</div>
-        </div>
-
-        <div id='chat-messages'></div>
-
-        <div class="row">
-            <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here... and press the enter"></textarea>
-        </div>
-    </div>   
         
         <div class="container-fluid" id='room-create' hidden>
             <div class="row">
