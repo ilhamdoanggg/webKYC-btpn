@@ -2,6 +2,7 @@
 {{> welcome}}
 
 <div class="container mt-3">
+    {{> message}}
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -22,7 +23,7 @@
                     <td>{{phoneNumber}}</td>
                     <td class="text-center text-white">
                         <a href="#" class="btn btn-success mb-1"><i class="fas fa-phone-square-alt"></i></a>
-                        <a href="/sales/offering-canvas/?id={{id}}" class="btn btn-primary mb-1"><i
+                        <a href="/sales/offering-canvas/{{id}}" class="btn btn-primary mb-1"><i
                                 class="fas fa-user-edit"></i></a>
                         <a href="/delete-customer/{{id}}" class="btn btn-danger mb-1"><i class="fas fa-trash"></i></a>
                     </td>

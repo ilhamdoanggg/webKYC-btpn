@@ -3,6 +3,7 @@
 
 <div class="container mt-3">
     {{#if customer}}
+    {{> message}}
     <form action="/update-customer" method="POST">
         <input type="text" name="id" value="{{customer.id}}" class="form-control" id="name" hidden>
         <div class="form-group row">
@@ -55,7 +56,7 @@
     </form>
 
     {{else}}
-
+    {{> message}}
     <form action="/create-customer" method="POST">
         <div class="form-group row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
