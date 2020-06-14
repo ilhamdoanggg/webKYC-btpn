@@ -30,8 +30,8 @@ module.exports = (app, passport) => {
       })
   });
 
-  app.get('/sales/offering-canvas/:id', (req, res) => {
-    const id = req.params.id;
+  app.get('/sales/offering-canvas', (req, res) => {
+    const id = req.query.id;
     if (id) {
       customerService.findById(id)
         .then(customer => {
