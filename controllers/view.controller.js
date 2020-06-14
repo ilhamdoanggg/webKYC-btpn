@@ -76,7 +76,8 @@ module.exports = (app, passport) => {
       .then(customer => {
         const data = {
           number: customer.customerNumber,
-          link: req.protocol + '://' + req.get('host') + `/debitur/?room=${id}`
+          // link: req.protocol + '://' + req.get('host') + `/debitur/?room=${id}`
+          link: 'https://' + req.get('host') + `/debitur/?room=${id}`
         }
         sendMessage(data);
         res.render('pages/videocall-confirmation', { user: req.user });
