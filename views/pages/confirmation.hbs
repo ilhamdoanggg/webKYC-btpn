@@ -13,36 +13,18 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each customers}}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>1234567</td>
-                    <td>0213435353</td>
+                    <th scope="row">{{counter @index}}</th>
+                    <td>{{name}}</td>
+                    <td>{{customerNumber}}</td>
+                    <td>{{phoneNumber}}</td>
                     <td class="text-center">
                         <a href="/sales/videocall-confirmation" class="btn btn-success btn-block">
                             <i class="fas fa-phone-square-alt"></i> Konfirmasi Awal</a>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jhon</td>
-                    <td>12323121321</td>
-                    <td>0212234234</td>
-                    <td class="text-center">
-                        <button class="btn btn-success btn-block">
-                            <i class="fas fa-phone-square-alt"></i> Konfirmasi Awal</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Angel</td>
-                    <td>2344212124</td>
-                    <td>121212414</td>
-                    <td class="text-center">
-                        <button class="btn btn-success btn-block">
-                            <i class="fas fa-phone-square-alt"></i> Konfirmasi Awal</button>
-                    </td>
-                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
