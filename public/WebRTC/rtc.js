@@ -198,7 +198,7 @@ window.addEventListener( 'load', () => {
                     newVid.id = `${ partnerName }-video`;
                     newVid.srcObject = str;
                     newVid.autoplay = true;
-                    newVid.className = 'remote-video';
+                    newVid.className = 'remote-video z';
 
                     //create a new div for card
                     let cardDiv = document.createElement( 'div' );
