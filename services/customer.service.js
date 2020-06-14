@@ -1,39 +1,52 @@
 const Customer = require('../models').customer;
 
-exports.create = (customer) => {
-    Customer.create({
+exports.create = async (customer) => {
+    let result;
+
+    await Customer.create({
         name: customer.name,
         customerNumber: customer.customerNumber,
         phoneNumber: customer.phoneNumber,
-        result: customer.result
+        activityId: customer.activityId,
+        result: customer.result,
+        note: customer.note
     }).then(customer => {
-        return {isSuccess: true, message: `Success created customer ${customer.name}`};
+        result = { isSuccess: true, message: `Success created customer ${customer.name}` };
     }).catch(function (err) {
         console.log("Created customer error: ", err);
-        return {isSuccess: false, message: "Error when created customer, please try again"};
+        result = { isSuccess: false, message: "Error when created customer, please try again" };
     });
+
+    return result;
 }
 
-exports.findAll = () => {
-    Customer.findAll().then(customers => {
-        return customers;
+exports.findAll = async () => {
+    let result;
+    await Customer.findAll().then(customers => {
+        result = customers;
     }).catch(function (err) {
         console.log("findAll customer error: ", err);
-        return null;
+        result = null;
     })
+    return result;
 }
 
-exports.findById = (id) => {
-    Customer.findById(id).then(customer => {
-        return customer;
+exports.findById = async (id) => {
+    let result;
+    await Customer.findById(id).then(customer => {
+        result = customer;
     }).catch(function (err) {
         console.log("Find customer error: ", err);
-        return null;
-    })
+        result = null;
+    });
+
+    return result;
 }
 
 exports.update = async (customer) => {
-    Customer.update({
+    let result;
+
+    await Customer.update({
         name: customer.name,
         customerNumber: customer.customerNumber,
         phoneNumber: customer.phoneNumber,
@@ -41,22 +54,28 @@ exports.update = async (customer) => {
         result: customer.result,
         note: customer.note
     }, {
-        where: {id: customer.id}
-    }).then(customer => {
-        return {isSuccess: true, message: `Success updated customer ${customer.name}`};
+        where: { id: customer.id }
+    }).then(() => {
+        result = { isSuccess: true, message: `Success updated customer ${customer.name}` };
     }).catch(function (err) {
         console.log("Updated customer error: ", err);
-        return {isSuccess: false, message: "Error when update customer, please try again"};
+        result = { isSuccess: false, message: "Error when update customer, please try again" };
     });
+
+    return result;
 }
 
-exports.delete = (id) => {
-    Customer.destroy({
+exports.delete = async (id) => {
+    let result;
+
+    await Customer.destroy({
         where: { id: id }
     }).then(() => {
-        return {isSuccess: true, message: `Success deleted customer`};
+        result = { isSuccess: true, message: `Success deleted customer` };
     }).catch(function (err) {
         console.log("Deleted customer error: ", err);
-        return {isSuccess: true, message: "Error when delete customer, please try again"};
+        result = { isSuccess: true, message: "Error when delete customer, please try again" };
     });
- };
+
+    return result;
+};
