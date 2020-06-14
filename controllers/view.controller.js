@@ -10,10 +10,6 @@ module.exports = (app, passport) => {
     res.render('pages/offering', { user: req.user, pageTitle: 'Offering' });
   });
 
-  app.get('/sales/confirmation', (req, res) => {
-    res.render('pages/confirmation', { user: req.user, pageTitle: 'Confirmation' });
-  });
-
   app.get('/sales/videocall-confirmation', (req, res) => {
     res.render('pages/videocall-confirmation', { user: req.user });
   });

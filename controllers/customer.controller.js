@@ -51,4 +51,14 @@ module.exports = (app) => {
     });
 
 
+    // route confirmations
+    app.get('/sales/confirmation', (req, res) => {
+        Customer.findAll().then(customers => {
+            res.render('pages/confirmation', { user: req.user, customers, pageTitle: 'Confirmation' });
+        }).catch(function (err) {
+            return null;
+        })
+    });
+
+
 }
