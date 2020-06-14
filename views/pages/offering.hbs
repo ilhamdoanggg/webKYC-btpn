@@ -4,14 +4,23 @@
 <div class="container mt-3">
     <div class="row justify-content-around ">
         <div class="col-sm-12 col-md-6 col-lg-4">
-            <a href="/sales/offering-data-potensi">
+            {{#if isAdmin}}
                 <div class="card m-3 shadow">
                     <div class="card-header text-center font-weight-bolder">Data Potensi</div>
                     <div class="card-body">
                         <img src="../assets/images/data-potensi.png" class="rounded mx-auto d-block" alt="Data Potensi">
                     </div>
                 </div>
-            </a>
+            {{else}}
+                <a href="/sales/offering-data-potensi">
+                    <div class="card m-3 shadow">
+                        <div class="card-header text-center font-weight-bolder">Data Potensi</div>
+                        <div class="card-body">
+                            <img src="../assets/images/data-potensi.png" class="rounded mx-auto d-block" alt="Data Potensi">
+                        </div>
+                    </div>
+                </a>
+            {{/if}}
         </div>
         <div class="col-sm-12 col-md-6 col-lg-4">
             <a href="/sales/offering-canvas">

@@ -21,7 +21,8 @@
 }
 
 #chat-messages{
-    margin-bottom: 20px;
+    overflow: scroll;
+    height: 440px;
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */

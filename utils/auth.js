@@ -9,7 +9,8 @@ const isLoggedIn = function(req, res, next) {
 const checkIsInRole = (...roles) => (req, res, next) => {
     const hasRole = roles.find(role => req.user.role === role)
     if (!hasRole) {
-        return res.redirect(getRedirectUrl(req.user.role))
+        req.flash('messageError', "You don't have permission. ")
+        return res.redirect('back');
     }
     return next();
 }

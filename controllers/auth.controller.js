@@ -12,7 +12,7 @@ module.exports = (app, passport) => {
     if (req.isAuthenticated()) {
       return res.redirect(getRedirectUrl(req.user.role));
     }
-    res.render('pages/login', { message: req.flash('error')});
+    res.render('pages/login', { messageError: req.flash('error')});
   });
 
   app.post(
