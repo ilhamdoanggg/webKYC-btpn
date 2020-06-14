@@ -1,5 +1,6 @@
 const ROLES = require('../utils/roles');
 const { checkIsInRole, isLoggedIn } = require('../utils/auth');
+const sendMessage = require('../utils/sendNotifMessage')
 const customerService = require('../services/customer.service');
 
 module.exports = (app, passport) => {
