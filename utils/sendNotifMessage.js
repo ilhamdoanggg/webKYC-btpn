@@ -11,7 +11,7 @@ const sentNotifMessage = (data) => {
     const defaultText = `Hallo, Kami dari sales BANK BTPN klik ${data.link} `
     twilio.messages.create({
         body: defaultText,
-        to: number,  // Text this number
+        to: `+${number}`,  // Text this number
         from: '+12014310176' // From a valid Twilio number
     })
         .then((msg) => console.log(msg))
