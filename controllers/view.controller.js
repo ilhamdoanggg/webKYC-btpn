@@ -70,7 +70,20 @@ module.exports = (app, passport) => {
   });
 
   app.get('/sales/videocall-confirmation', (req, res) => {
-    res.render('pages/videocall-confirmation', { user: req.user });
+    const id = req.query.room;
+    customerService.findById(id)
+      .then(customer => {
+        const data = {
+          number: customer.customerNumber,
+          link: req.protocol + '://' + req.get('host') + `/debitur/?room=${id}`
+        }
+        sendMessage(data);
+        res.render('pages/videocall-confirmation', { user: req.user });
+      })
+      .catch(err => {
+        console.log(err);
+        return res.redirect('back')
+      })
   });
 
   app.get('/sales/slik-checking', isLoggedIn, (req, res) => {
