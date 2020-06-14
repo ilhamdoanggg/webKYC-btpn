@@ -7,19 +7,19 @@
                 <div class="form-group row">
                     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama">
+                        <input type="text" class="form-control" id="nama" value={{customer.name}} readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nopen" class="col-sm-2 col-form-label">Nopen</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nopen">
+                        <input type="text" class="form-control" id="nopen" value={{customer.customerNumber}} readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="no-telp" class="col-sm-2 col-form-label">No telp</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control mb-2" id="no-telp">
+                        <input type="text" class="form-control mb-2" id="no-telp" value={{customer.phoneNumber}} readonly>
                     </div>
                 </div>
             </form>
@@ -106,48 +106,6 @@
             </div>
         </div>
     </div>
-        
-        <div class="container-fluid" id='room-create' hidden>
-            <div class="row">
-                <div class="col-12 h2 mt-5 text-center">Create Room</div>
-            </div>
-            
-            <div class="row mt-2">
-                <div class="col-12 text-center">
-                    <span class="form-text small text-danger" id='err-msg'></span>
-                </div>
-
-                <div class="col-12 col-md-4 offset-md-4 mb-3">
-                    <label for="your-name">Your Name</label>
-                    <input type="text" id='your-name' value="hello@email.com" class="form-control rounded-0" placeholder="Your Name">
-                </div>
-
-                <div class="col-12 col-md-4 offset-md-4 mb-3">
-                    <button id='create-room' class="btn btn-block rounded-0 btn-info">Create Room</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="container-fluid" id='username-set' hidden>
-            <div class="row">
-                <div class="col-12 h4 mt-5 text-center">Your Name</div>
-            </div>
-            
-            <div class="row mt-2">
-                <div class="col-12 text-center">
-                    <span class="form-text small text-danger" id='err-msg-username'></span>
-                </div>
-
-                <div class="col-12 col-md-4 offset-md-4 mb-3">
-                    <label for="username">Your Name</label>
-                    <input type="text" id='username' class="form-control rounded-0" placeholder="Your Name">
-                </div>
-
-                <div class="col-12 col-md-4 offset-md-4 mb-3">
-                    <button id='enter-room' class="btn btn-block rounded-0 btn-info">Enter Room</button>
-                </div>
-            </div>
-        </div>
 </div>
 
 <script src='/socket.io/socket.io.js'></script>
@@ -159,8 +117,7 @@
 <script src="/Canvas/canvas-designer-widget.js"></script>
 <script src="/Canvas/canvas-designer.js"></script>
 <script>
-    sessionStorage.setItem('name', `{{user.firstName}} {{user.lastName}}`)
-    sessionStorage.setItem('username', `Testing{{user.email}}`)
+    sessionStorage.setItem('username', `{{user.firstName}} {{user.lastName}}`)
 </script>
 
 {{> footer}}
