@@ -1,5 +1,6 @@
 const ROLES = require('../utils/roles');
 const { checkIsInRole, isLoggedIn } = require('../utils/auth');
+const customerService = require('../services/customer.service');
 
 module.exports = (app, passport) => {
   app.get('/sales/home', (req, res) => {
@@ -10,10 +11,67 @@ module.exports = (app, passport) => {
     res.render('pages/offering', { user: req.user, pageTitle: 'Offering' });
   });
 
+  app.get('/sales/offering-data-potensi', (req, res) => {
+    customerService.findAll()
+      .then(customers => {
+        res.render('pages/offering-data-potensi',
+          {
+            user: req.user,
+            customers,
+            messageSuccess: req.flash('messageSuccess'),
+            messageError: req.flash('messageErorr'),
+            pageTitle: 'Offering - Data Potensi'
+          }
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        return null;
+      })
+  });
+
+  app.get('/sales/offering-canvas/:id', (req, res) => {
+    const id = req.params.id;
+    if (id) {
+      customerService.findById(id)
+        .then(customer => {
+          res.render('pages/offering-canvas', { user: req.user, customer, pageTitle: 'Offering - Canvasing' });
+        })
+        .catch(function (err) {
+          return null;
+        })
+    } else {
+      return res.render('pages/offering-canvas',
+        {
+          user: req.user,
+          messageSuccess: req.flash('messageSuccess'),
+          messageError: req.flash('messageErorr'),
+          pageTitle: 'Offering - Canvasing'
+        }
+      );
+    }
+  });
+
+  // route confirmations
+  app.get('/sales/confirmation', (req, res) => {
+    customerService.findAll()
+      .then(customers => {
+        res.render('pages/confirmation',
+          {
+            user: req.user,
+            customers,
+            pageTitle: 'Confirmation'
+          }
+        );
+      })
+      .catch(function (err) {
+        return null;
+      })
+  });
+
   app.get('/sales/videocall-confirmation', (req, res) => {
     res.render('pages/videocall-confirmation', { user: req.user });
   });
-
 
   app.get('/sales/slik-checking', isLoggedIn, (req, res) => {
     res.render('pages/slik-checking', { user: req.user, pageTitle: 'Slik Checking' });
