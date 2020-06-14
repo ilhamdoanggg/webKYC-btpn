@@ -82,7 +82,7 @@ module.exports = (passport, user) => {
           return bCrypt.compareSync(password, userpass);
         };
 
-        User.findOne({ where: { email: email } })
+        User.findOne({where: { email: email } })
           .then(user => {
             if (!user) {
               return done(null, false, { message: 'Email does not exist' });
@@ -91,8 +91,11 @@ module.exports = (passport, user) => {
             if (!isValidPassword(user.password, password)) {
               return done(null, false, { message: 'Incorrect password.' });
             }
-
+            user.update({lastLogin: new Date()});
+            delete user.dataValues.password;
             var userinfo = user.get();
+
+            console.log(userinfo)
 
             return done(null, userinfo);
           })
