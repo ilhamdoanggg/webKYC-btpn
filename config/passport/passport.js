@@ -20,50 +20,6 @@ module.exports = (passport, user) => {
     });
   });
 
-  passport.use(
-    'local-signup',
-    new LocalStrategy(
-      {
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true // allows us to pass back the entire request to the callback
-      },
-
-      function(req, email, password, done) {
-        var generateHash = password => {
-          return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-        };
-
-        User.findOne({ where: { email: email } }).then(user => {
-          if (user) {
-            return done(null, false, {
-              message: 'That email is already taken'
-            });
-          } else {
-            var userPassword = generateHash(password);
-            var data = {
-              email: email,
-              password: userPassword,
-              firstname: req.body.firstname,
-              lastname: req.body.lastname,
-              role: req.body.role == "" ? 2 : req.body.role
-            };
-
-            User.create(data).then((newUser, created) => {
-              if (!newUser) {
-                return done(null, false);
-              }
-
-              if (newUser) {
-                return done(null, newUser);
-              }
-            });
-          }
-        });
-      }
-    )
-  );
-
   //LOCAL SIGNIN
   passport.use(
     'local-signin',
@@ -82,7 +38,7 @@ module.exports = (passport, user) => {
           return bCrypt.compareSync(password, userpass);
         };
 
-        User.findOne({ where: { email: email } })
+        User.findOne({where: { email: email } })
           .then(user => {
             if (!user) {
               return done(null, false, { message: 'Email does not exist' });
@@ -91,7 +47,8 @@ module.exports = (passport, user) => {
             if (!isValidPassword(user.password, password)) {
               return done(null, false, { message: 'Incorrect password.' });
             }
-
+            user.update({lastLogin: new Date()});
+            delete user.dataValues.password;
             var userinfo = user.get();
 
             return done(null, userinfo);

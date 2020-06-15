@@ -198,25 +198,16 @@ window.addEventListener( 'load', () => {
                     newVid.id = `${ partnerName }-video`;
                     newVid.srcObject = str;
                     newVid.autoplay = true;
-                    newVid.className = 'remote-video mirror-mode';
-
-                    //video controls elements
-                    let controlDiv = document.createElement( 'div' );
-                    controlDiv.className = 'remote-video-controls';
-                    controlDiv.innerHTML = `<i class="fa fa-microphone text-white pr-3 mute-remote-mic" title="Mute"></i>
-                        <i class="fa fa-expand text-white expand-remote-video" title="Expand"></i>`;
+                    newVid.className = 'remote-video z';
 
                     //create a new div for card
                     let cardDiv = document.createElement( 'div' );
                     cardDiv.className = 'card card-sm';
                     cardDiv.id = partnerName;
                     cardDiv.appendChild( newVid );
-                    cardDiv.appendChild( controlDiv );
 
                     //put div in main-section elem
                     document.getElementById( 'videos' ).appendChild( cardDiv );
-
-                    h.adjustVideoElemSize();
                 }
             };
 
@@ -247,9 +238,7 @@ window.addEventListener( 'load', () => {
             };
         }
 
-
-
-        function shareScreen() {
+        function shareScreen() {    
             h.shareScreen().then( ( stream ) => {
                 h.toggleShareIcons( true );
 
@@ -421,7 +410,6 @@ window.addEventListener( 'load', () => {
         //When user clicks the 'Share screen' button
         document.getElementById( 'share-screen' ).addEventListener( 'click', ( e ) => {
             e.preventDefault();
-
             if ( screen && screen.getVideoTracks().length && screen.getVideoTracks()[0].readyState != 'ended' ) {
                 stopSharingScreen();
             }

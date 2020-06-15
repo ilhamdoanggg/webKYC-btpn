@@ -1,17 +1,16 @@
-const ROLES = require('../utils/roles');
-
 module.exports = (sequelize, Sequelize) => {
-  var User = sequelize.define('user', {
+  const User = sequelize.define('user', {
     id: { 
-      autoIncrement: true, 
+      allowNull: false,
       primaryKey: true, 
-      type: Sequelize.INTEGER 
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4
     },
-    firstname: { 
+    firstName: { 
       type: Sequelize.STRING, 
       notEmpty: true 
     },
-    lastname: { 
+    lastName: { 
       type: Sequelize.STRING, 
       notEmpty: true 
     },
@@ -26,10 +25,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false 
     },
     role: {
-      type: Sequelize.INTEGER,
-      defaultValue: ROLES.Debitur
+      type: Sequelize.INTEGER
     },
-    last_login: { 
+    lastLogin: { 
       type: Sequelize.DATE 
     },
     status: {
@@ -37,6 +35,5 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: 'active'
     }
   });
-
   return User;
 };

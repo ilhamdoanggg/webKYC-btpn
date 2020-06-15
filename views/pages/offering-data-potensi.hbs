@@ -1,13 +1,8 @@
 {{> header}}
-<div class="container" style="margin-top: 90px;">
-    <div class="row">
-        <div class="col-12">
-            <h5 class="text-right">Selamat Datang, aloel Dev</h5>
-        </div>
-    </div>
-    <h1 class="text-center">OFFERING - Data Potensi</h1>
-</div>
+{{> welcome}}
+
 <div class="container mt-3">
+    {{> message}}
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -20,36 +15,20 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each customers}}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>1234567</td>
-                    <td>0213435353</td>
-                    <td class="text-center">
-                        <button class="btn btn-success btn-block">
-                            <i class="fas fa-phone-square-alt"></i> Call</button>
+                    <th scope="row">{{counter @index}}</th>
+                    <td>{{name}}</td>
+                    <td>{{customerNumber}}</td>
+                    <td>{{phoneNumber}}</td>
+                    <td class="text-center text-white">
+                        <a href="#" class="btn btn-success mb-1"><i class="fas fa-phone-square-alt"></i></a>
+                        <a href="/sales/offering-canvas/?id={{id}}" class="btn btn-primary mb-1"><i
+                                class="fas fa-user-edit"></i></a>
+                        <a href="/delete-customer/{{id}}" class="btn btn-danger mb-1"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jhon</td>
-                    <td>12323121321</td>
-                    <td>0212234234</td>
-                    <td class="text-center">
-                        <button class="btn btn-success btn-block">
-                            <i class="fas fa-phone-square-alt"></i> Call</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Angel</td>
-                    <td>2344212124</td>
-                    <td>121212414</td>
-                    <td class="text-center">
-                        <button class="btn btn-success btn-block">
-                            <i class="fas fa-phone-square-alt"></i> Call</button>
-                    </td>
-                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>

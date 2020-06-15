@@ -9,10 +9,14 @@ const exphbs = require('express-handlebars');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const stream = require('./utils/stream');
+const flash = require('connect-flash');
 
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Connect Flash
+app.use(flash());
 
 // Passport
 app.use(
@@ -37,6 +41,11 @@ const exphbsConfig = exphbs.create({
 app.engine('hbs', exphbsConfig.engine);
 app.set('view engine', '.hbs');
 
+// make counter handlebars
+exphbsConfig.handlebars.registerHelper("counter", function (index) {
+  return index + 1;
+});
+
 // Models
 const models = require('./models');
 
@@ -47,16 +56,32 @@ app.use('/canvas-designer', express.static('node_modules/canvas-designer/'));
 // Routes
 require('./controllers/auth.controller.js')(app, passport);
 require('./controllers/view.controller.js')(app, passport);
+require('./controllers/customer.controller')(app);
 // Load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
 
 // Initialize port
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 3000
+
+const bCrypt = require('bcrypt-nodejs');
+const ROLE = require('./utils/roles');
+
+var generateHash = password => {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+};
+
+const userInit = async () => {
+  await models.user.sync({ force: true });
+  await models.user.create({ firstName: "Admin", lastName: "Tester", email: "admin@email.com", password: generateHash("admin"), role: ROLE.Admin });
+  await models.user.create({ firstName: "Manager", lastName: "Tester", email: "manager@email.com", password: generateHash("manager"), role: ROLE.Manager });
+  await models.user.create({ firstName: "Sales", lastName: "Tester", email: "sales@email.com", password: generateHash("sales"), role: ROLE.Sales });
+}
 
 // Sync Database
 models.sequelize
   .sync()
   .then(function () {
+    userInit();
     io.of('/stream').on('connection', stream);
 
     server.listen(port, function (err) {
