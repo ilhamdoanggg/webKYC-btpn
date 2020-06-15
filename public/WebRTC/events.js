@@ -1,99 +1,109 @@
 import helpers from './helpers.js';
 
-window.addEventListener( 'load', () => {
+window.addEventListener('load', () => {
+    // deklarasi button
+    const btnEndCall = document.querySelector('#btn-endcall');
+    const btnVideoCall = document.querySelector('#btn-video-call');
+    const btnSendFile = document.querySelector('#btn-send-file');
+    const btnDocument = document.querySelector('#btn-document');
+    const btnResult = document.querySelector('#btn-result');
+    const btnPen = document.querySelector('#btn-pen');
+
+    // disable button
+    btnEndCall.disabled = true;
+    btnSendFile.disabled = true;
+    btnDocument.disabled = true;
+    btnResult.disabled = true;
+    btnPen.disabled = true;
+
     //When the chat icon is clicked
-    document.querySelector( '#nav-chat-tab' ).addEventListener( 'click', ( e ) => {
+    document.querySelector('#nav-chat-tab').addEventListener('click', (e) => {
         //remove the 'New' badge on chat icon (if any) once chat is opened.
-        setTimeout( () => {
-            if ( document.querySelector( '#chat-pane' ).classList.contains( 'chat-opened' ) ) {
+        setTimeout(() => {
+            if (document.querySelector('#chat-pane').classList.contains('chat-opened')) {
                 helpers.toggleChatNotificationBadge();
             }
-        }, 300 );
-    } );
+        }, 300);
+    });
 
 
     //When the video frame is clicked. This will enable picture-in-picture
-    document.getElementById( 'local' ).addEventListener( 'click', () => {
-        if ( !document.pictureInPictureElement ) {
-            document.getElementById( 'local' ).requestPictureInPicture()
-                .catch( error => {
+    document.getElementById('local').addEventListener('click', () => {
+        if (!document.pictureInPictureElement) {
+            document.getElementById('local').requestPictureInPicture()
+                .catch(error => {
                     // Video failed to enter Picture-in-Picture mode.
-                    console.error( error );
-                } );
+                    console.error(error);
+                });
         }
 
         else {
             document.exitPictureInPicture()
-                .catch( error => {
+                .catch(error => {
                     // Video failed to leave Picture-in-Picture mode.
-                    console.error( error );
-                } );
+                    console.error(error);
+                });
         }
-    } );
+    });
 
 
     //When the 'Create room" is button is clicked
-    document.getElementById( 'create-room' ).addEventListener( 'click', ( e ) => {
+    btnVideoCall.addEventListener('click', (e) => {
         e.preventDefault();
 
-        let yourName = document.querySelector( '#your-name' ).value;
+        // enable btn
+        btnEndCall.disabled = false;
+        btnSendFile.disabled = false;
+        btnDocument.disabled = false;
+        btnResult.disabled = false;
+        btnPen.disabled = false;
 
-        if ( yourName ) {
-            //remove error message, if any
-            document.querySelector( '#err-msg' ).innerHTML = "";
+        // disabled btn video call
+        btnVideoCall.disabled = true;
 
-            //save the user's name in sessionStorage
-            sessionStorage.setItem( 'username', yourName );
+        const { origin, pathname, search } = location;
 
-            //create room link
-            let roomLink = `${ location.origin }/debitur?room=${ yourName.trim().replace( ' ', '_' ) }_${ helpers.generateRandomString() }`;
-            // console.log(roomLink);
-            window.location.replace(roomLink);
-            //empty the values
-            document.querySelector( '#your-name' ).value = '';
-        }
-
-        else {
-            document.querySelector( '#err-msg' ).innerHTML = "All fields are required";
-        }
-    } );
+        // create room link
+        let roomLink = `${origin}${pathname}${search}&room=${helpers.generateRandomString()}`;
+        window.location.replace(roomLink);
+    });
 
 
     //When the 'Enter room' button is clicked.
-    document.getElementById( 'enter-room' ).addEventListener( 'click', ( e ) => {
+    document.getElementById('enter-room').addEventListener('click', (e) => {
         e.preventDefault();
 
-        let name = document.querySelector( '#username' ).value;
+        let name = document.querySelector('#username').value;
 
-        if ( name ) {
+        if (name) {
             //remove error message, if any
-            document.querySelector( '#err-msg-username' ).innerHTML = "";
+            document.querySelector('#err-msg-username').innerHTML = "";
 
             //save the user's name in sessionStorage
-            sessionStorage.setItem( 'username', name );
+            sessionStorage.setItem('username', name);
 
             //reload room
             location.reload();
         }
 
         else {
-            document.querySelector( '#err-msg-username' ).innerHTML = "Please input your name";
+            document.querySelector('#err-msg-username').innerHTML = "Please input your name";
         }
-    } );
+    });
 
 
-    document.addEventListener( 'click', ( e ) => {
-        if ( e.target && e.target.classList.contains( 'expand-remote-video' ) ) {
-            helpers.maximiseStream( e );
+    document.addEventListener('click', (e) => {
+        if (e.target && e.target.classList.contains('expand-remote-video')) {
+            helpers.maximiseStream(e);
         }
 
-        else if ( e.target && e.target.classList.contains( 'mute-remote-mic' ) ) {
-            helpers.singleStreamToggleMute( e );
+        else if (e.target && e.target.classList.contains('mute-remote-mic')) {
+            helpers.singleStreamToggleMute(e);
         }
-    } );
+    });
 
 
-    document.getElementById( 'closeModal' ).addEventListener( 'click', () => {
-        helpers.toggleModal( 'recording-options-modal', false );
-    } );
-} );
+    document.getElementById('closeModal').addEventListener('click', () => {
+        helpers.toggleModal('recording-options-modal', false);
+    });
+});

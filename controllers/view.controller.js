@@ -79,15 +79,15 @@ module.exports = (app) => {
   });
 
   app.get('/sales/videocall-confirmation', (req, res) => {
-    const id = req.query.room;
+    const { id, room } = req.query;
     customerService.findById(id)
       .then(customer => {
-        const data = {
-          number: customer.phoneNumber,
-          // link: req.protocol + '://' + req.get('host') + `/debitur/?room=${id}`
-          link: 'https://' + req.get('host') + `/debitur/?room=${id}`
+        if (room) {
+          // const data = {
+          //   number : customer.phoneNumber,
+          //   link : 
+          // }
         }
-        sendMessage(data);
         res.render('pages/videocall-confirmation', {
           user: req.user,
           customer: customer,
@@ -97,6 +97,8 @@ module.exports = (app) => {
         console.log(err);
         return res.redirect('back')
       })
+
+
   });
 
   app.get('/sales/slik-checking', isLoggedIn, (req, res) => {
