@@ -74,7 +74,7 @@ exports.delete = async (id) => {
         result = { isSuccess: true, message: `Success deleted customer` };
     }).catch(function (err) {
         console.log("Deleted customer error: ", err);
-        result = { isSuccess: true, message: "Error when delete customer, please try again" };
+        result = { isSuccess: false, message: "Error when delete customer, please try again" };
     });
 
     return result;
