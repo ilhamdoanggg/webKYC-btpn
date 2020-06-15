@@ -27,6 +27,7 @@
     "twilio": "^3.46.0"
   },
   "devDependencies": {
+    "mysql2": "^2.1.0",
     "nodemon": "^2.0.4"
   }
 }

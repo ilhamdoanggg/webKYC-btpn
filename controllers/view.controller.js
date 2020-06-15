@@ -3,17 +3,17 @@ const { checkIsInRole, isLoggedIn } = require('../utils/auth');
 const sendMessage = require('../utils/sendNotifMessage')
 const customerService = require('../services/customer.service');
 
-module.exports = (app                                                                                                                                                                                                                                                                                                                     ) => {
+module.exports = (app) => {
   app.get('/sales/home', isLoggedIn, (req, res) => {
-    res.render('pages/home', { 
-      user: req.user, 
-      pageTitle: 'Menu Utama' 
+    res.render('pages/home', {
+      user: req.user,
+      pageTitle: 'Menu Utama'
     });
   });
 
-  app.get('/sales/offering', isLoggedIn,(req, res) => {
-    res.render('pages/offering', { 
-      user: req.user, 
+  app.get('/sales/offering', isLoggedIn, (req, res) => {
+    res.render('pages/offering', {
+      user: req.user,
       pageTitle: 'Offering',
       isAdmin: req.user.role === ROLES.Admin ? true : false,
     });
@@ -23,12 +23,12 @@ module.exports = (app                                                           
     customerService.findAll()
       .then(customers => {
         res.render('pages/offering-data-potensi', {
-            user: req.user,
-            customers,
-            messageSuccess: req.flash('messageSuccess'),
-            messageError: req.flash('messageErorr'),
-            pageTitle: 'Offering - Data Potensi'
-          }
+          user: req.user,
+          customers,
+          messageSuccess: req.flash('messageSuccess'),
+          messageError: req.flash('messageErorr'),
+          pageTitle: 'Offering - Data Potensi'
+        }
         );
       })
       .catch((err) => {
@@ -42,10 +42,10 @@ module.exports = (app                                                           
     if (id) {
       customerService.findById(id)
         .then(customer => {
-          res.render('pages/offering-canvas', { 
-            user: req.user, 
-            customer, 
-            pageTitle: 'Offering - Canvasing' 
+          res.render('pages/offering-canvas', {
+            user: req.user,
+            customer,
+            pageTitle: 'Offering - Canvasing'
           });
         })
         .catch(function (err) {
@@ -53,11 +53,11 @@ module.exports = (app                                                           
         })
     } else {
       return res.render('pages/offering-canvas', {
-          user: req.user,
-          messageSuccess: req.flash('messageSuccess'),
-          messageError: req.flash('messageErorr'),
-          pageTitle: 'Offering - Canvasing'
-        }
+        user: req.user,
+        messageSuccess: req.flash('messageSuccess'),
+        messageError: req.flash('messageErorr'),
+        pageTitle: 'Offering - Canvasing'
+      }
       );
     }
   });
@@ -67,10 +67,10 @@ module.exports = (app                                                           
     customerService.findAll()
       .then(customers => {
         res.render('pages/confirmation', {
-            user: req.user,
-            customers,
-            pageTitle: 'Confirmation'
-          }
+          user: req.user,
+          customers,
+          pageTitle: 'Confirmation'
+        }
         );
       })
       .catch(function (err) {
@@ -79,16 +79,18 @@ module.exports = (app                                                           
   });
 
   app.get('/sales/videocall-confirmation', (req, res) => {
-    const id = req.query.room;
+    const { id, room } = req.query;
     customerService.findById(id)
       .then(customer => {
-        const data = {
-          number: customer.customerNumber,
-          // link: req.protocol + '://' + req.get('host') + `/debitur/?room=${id}`
-          link: 'https://' + req.get('host') + `/debitur/?room=${id}`
+        if (room) {
+          const path = req.originalUrl.replace('sales/videocall-confirmation/', 'debitur');
+          const data = {
+            number: customer.phoneNumber,
+            link: `https://${req.get('host')}${path}`
+          }
+          sendMessage(data);
         }
-        // sendMessage(data);
-        res.render('pages/videocall-confirmation', { 
+        res.render('pages/videocall-confirmation', {
           user: req.user,
           customer: customer,
         });
@@ -97,53 +99,55 @@ module.exports = (app                                                           
         console.log(err);
         return res.redirect('back')
       })
+
+
   });
 
   app.get('/sales/slik-checking', isLoggedIn, (req, res) => {
-    res.render('pages/slik-checking', { 
-      user: req.user, 
-      pageTitle: 'Slik Checking' 
+    res.render('pages/slik-checking', {
+      user: req.user,
+      pageTitle: 'Slik Checking'
     });
   });
 
   app.get('/sales/audit-trail', isLoggedIn, (req, res) => {
-    res.render('pages/audit-trail', { 
-      user: req.user, 
-      pageTitle: 'Audit Trail' 
+    res.render('pages/audit-trail', {
+      user: req.user,
+      pageTitle: 'Audit Trail'
     });
   });
 
   app.get('/sales/disbursement', isLoggedIn, (req, res) => {
-    res.render('pages/disbursement', { 
-      user: req.user, 
-      pageTitle: 'Disbursement' 
+    res.render('pages/disbursement', {
+      user: req.user,
+      pageTitle: 'Disbursement'
     });
   });
   app.get('/sales/disbursement-input', isLoggedIn, (req, res) => {
-    res.render('pages/disbursement-input', { 
-      user: req.user, 
-      pageTitle: 'Disbursement' 
+    res.render('pages/disbursement-input', {
+      user: req.user,
+      pageTitle: 'Disbursement'
     });
   });
 
   app.get('/sales/monitoring', isLoggedIn, (req, res) => {
-    res.render('pages/monitoring', { 
-      user: req.user, 
-      pageTitle: 'Monitoring' 
+    res.render('pages/monitoring', {
+      user: req.user,
+      pageTitle: 'Monitoring'
     });
   });
 
   app.get('/sales/videocall-verification', isLoggedIn, (req, res) => {
-    res.render('pages/videocall-verification', { 
-      user: req.user, 
-      pageTitle: 'Verification' 
+    res.render('pages/videocall-verification', {
+      user: req.user,
+      pageTitle: 'Verification'
     });
   });
 
   app.get('/sales/verification', isLoggedIn, (req, res) => {
-    res.render('pages/verification', { 
-      user: req.user, 
-      pageTitle: 'Verification' 
+    res.render('pages/verification', {
+      user: req.user,
+      pageTitle: 'Verification'
     });
   });
 
