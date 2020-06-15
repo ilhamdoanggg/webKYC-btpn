@@ -83,10 +83,12 @@ module.exports = (app) => {
     customerService.findById(id)
       .then(customer => {
         if (room) {
-          // const data = {
-          //   number : customer.phoneNumber,
-          //   link : 
-          // }
+          const path = req.originalUrl.replace('sales', 'debitur');
+          const data = {
+            number: customer.phoneNumber,
+            link: `https://${req.get('host')}${path}`
+          }
+          sendMessage(data);
         }
         res.render('pages/videocall-confirmation', {
           user: req.user,

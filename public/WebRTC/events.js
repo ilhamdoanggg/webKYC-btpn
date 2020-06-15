@@ -2,19 +2,17 @@ import helpers from './helpers.js';
 
 window.addEventListener('load', () => {
     // deklarasi button
-    const btnEndCall = document.querySelector('#btn-endcall');
-    const btnVideoCall = document.querySelector('#btn-video-call');
-    const btnSendFile = document.querySelector('#btn-send-file');
-    const btnDocument = document.querySelector('#btn-document');
-    const btnResult = document.querySelector('#btn-result');
-    const btnPen = document.querySelector('#btn-pen');
-
+    let btn = {
+        btnEndCall: document.querySelector('#btn-endcall'),
+        btnVideoCall: document.querySelector('#btn-video-call'),
+        btnSendFile: document.querySelector('#btn-send-file'),
+        btnDocument: document.querySelector('#btn-document'),
+        btnResult: document.querySelector('#btn-result'),
+        btnPen: document.querySelector('#btn-pen')
+    }
     // disable button
-    btnEndCall.disabled = true;
-    btnSendFile.disabled = true;
-    btnDocument.disabled = true;
-    btnResult.disabled = true;
-    btnPen.disabled = true;
+    let event = sessionStorage.getItem('btn');
+    helpers.disableButton(btn, event)
 
     //When the chat icon is clicked
     document.querySelector('#nav-chat-tab').addEventListener('click', (e) => {
@@ -48,24 +46,21 @@ window.addEventListener('load', () => {
 
 
     //When the 'Create room" is button is clicked
-    btnVideoCall.addEventListener('click', (e) => {
+    btn.btnVideoCall.addEventListener('click', (e) => {
         e.preventDefault();
-
-        // enable btn
-        btnEndCall.disabled = false;
-        btnSendFile.disabled = false;
-        btnDocument.disabled = false;
-        btnResult.disabled = false;
-        btnPen.disabled = false;
-
-        // disabled btn video call
-        btnVideoCall.disabled = true;
+        console.log(location);
 
         const { origin, pathname, search } = location;
-
         // create room link
         let roomLink = `${origin}${pathname}${search}&room=${helpers.generateRandomString()}`;
         window.location.replace(roomLink);
+        sessionStorage.setItem('btn', 'enable')
+    });
+
+    btn.btnEndCall.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.history.back();
+        sessionStorage.setItem('btn', null)
     });
 
 
