@@ -35,5 +35,10 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: 'active'
     }
   });
+
+  User.associate = function(models) {
+    User.hasMany(models.customer, {as: 'customers', foreignKey: "salesId"})
+  };
+
   return User;
 };

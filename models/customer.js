@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  var Customer = sequelize.define('customer', {
+  const Customer = sequelize.define('customer', {
     id: { 
         allowNull: false,
         primaryKey: true, 
@@ -27,5 +27,9 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
+  Customer.associate = function(models) {
+    Customer.belongsTo(models.user, {as: 'sales', foreignKey: 'salesId', })
+  };
+  
   return Customer;
 };
