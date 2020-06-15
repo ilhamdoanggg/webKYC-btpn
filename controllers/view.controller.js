@@ -83,7 +83,7 @@ module.exports = (app) => {
     customerService.findById(id)
       .then(customer => {
         const data = {
-          number: customer.customerNumber,
+          number: customer.phoneNumber,
           // link: req.protocol + '://' + req.get('host') + `/debitur/?room=${id}`
           link: 'https://' + req.get('host') + `/debitur/?room=${id}`
         }
