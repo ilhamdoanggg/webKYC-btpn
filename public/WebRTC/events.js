@@ -44,19 +44,6 @@ window.addEventListener('load', () => {
         }
     });
 
-
-    //When the 'Create room" is button is clicked
-    btn.btnVideoCall.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log(location);
-
-        const { origin, pathname, search } = location;
-        // create room link
-        let roomLink = `${origin}${pathname}${search}&room=${helpers.generateRandomString()}`;
-        window.location.replace(roomLink);
-        sessionStorage.setItem('btn', 'enable')
-    });
-
     btn.btnEndCall.addEventListener('click', (e) => {
         e.preventDefault();
         window.history.back();
