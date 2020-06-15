@@ -78,18 +78,18 @@ module.exports = (app) => {
       })
   });
 
-  app.get('/sales/videocall-confirmation', (req, res) => {
+  app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
     const { id, room } = req.query;
     customerService.findById(id)
       .then(customer => {
-        if (room) {
-          const path = req.originalUrl.replace('sales/videocall-confirmation/', 'debitur');
-          const data = {
-            number: customer.phoneNumber,
-            link: `https://${req.get('host')}${path}`
-          }
-          sendMessage(data);
-        }
+        // if (room) {
+        //   const path = req.originalUrl.replace('sales/videocall-confirmation/', 'debitur');
+        //   const data = {
+        //     number: customer.phoneNumber,
+        //     link: `https://${req.get('host')}${path}`
+        //   }
+        //   // sendMessage(data);
+        // }
         res.render('pages/videocall-confirmation', {
           user: req.user,
           customer: customer,

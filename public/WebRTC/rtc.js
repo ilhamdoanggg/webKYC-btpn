@@ -8,15 +8,15 @@ window.addEventListener('load', () => {
     const room = h.getQString(location.href, 'room');
     const username = sessionStorage.getItem('username');
 
-    if (!room) {
-        document.querySelector('#room-create').attributes.removeNamedItem('hidden');
-    }
+    // if (!room) {
+    //     document.querySelector('#room-create').attributes.removeNamedItem('hidden');
+    // }
 
-    else if (!username) {
-        document.querySelector('#username-set').attributes.removeNamedItem('hidden');
-    }
+    // else if (!username) {
+    //     document.querySelector('#username-set').attributes.removeNamedItem('hidden');
+    // }
 
-    else {
+    // else {
 
         let btn = {
             btnEndCall: document.querySelector('#btn-endcall'),
@@ -28,7 +28,6 @@ window.addEventListener('load', () => {
         }
         // enable button
         let eventBtn = sessionStorage.getItem('btn');
-        h.disableButton(btn, eventBtn);
 
         let commElem = document.getElementsByClassName('room-comm');
 
@@ -483,5 +482,5 @@ window.addEventListener('load', () => {
                 }).catch(() => { });
             }
         });
-    }
+    // }
 });

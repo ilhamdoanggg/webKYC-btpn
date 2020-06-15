@@ -270,21 +270,19 @@ export default {
     },
 
     disableButton(btn, event) {
-        let { btnEndCall, btnVideoCall, btnSendFile, btnDocument, btnResult, btnPen } = btn
-        if (event !== 'enable' || null || '') {
-            btnEndCall.disabled = true;
-            btnVideoCall.disabled = false;
-            btnSendFile.disabled = true;
-            btnDocument.disabled = true;
-            btnResult.disabled = true;
-            btnPen.disabled = true;
-        } else {
-            btnEndCall.disabled = false;
-            btnVideoCall.disabled = true;
-            btnSendFile.disabled = false;
-            btnDocument.disabled = false;
-            btnResult.disabled = false;
-            btnPen.disabled = false;
-        }
+        // let { btnEndCall, btnVideoCall, btnDocument, btnResult, btnPen } = btn
+        // if (event !== 'enable' || null || '') {
+        //     btnEndCall.disabled = true;
+        //     btnVideoCall.disabled = false;
+        //     btnDocument.disabled = true;
+        //     btnResult.disabled = true;
+        //     btnPen.disabled = true;
+        // } else {
+        //     btnEndCall.disabled = false;
+        //     btnVideoCall.disabled = true;
+        //     btnDocument.disabled = false;
+        //     btnResult.disabled = false;
+        //     btnPen.disabled = false;
+        // }
     }
 };
