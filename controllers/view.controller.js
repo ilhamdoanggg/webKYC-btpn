@@ -79,8 +79,8 @@ module.exports = (app) => {
   });
 
   app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
-    const { id, room } = req.query;
-    customerService.findById(id)
+    const customerId = req.query.room;
+    customerService.findById(customerId)
       .then(customer => {
         // if (room) {
         //   const path = req.originalUrl.replace('sales/videocall-confirmation/', 'debitur');

@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "root",	   
-    "database": "webKYC",	 
+    "password": "root",
+    "database": "webKYC",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
@@ -20,5 +20,13 @@
     "database": "d2p8npm7r7kemk",
     "host": "ec2-52-202-22-140.compute-1.amazonaws.com",
     "dialect": "postgres"
+  },
+  "aloel_env": {
+    "username": "root",
+    "password": "",
+    "database": "kyc_btpn",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
   }
 }

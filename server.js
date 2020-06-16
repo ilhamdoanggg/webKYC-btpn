@@ -72,7 +72,7 @@ var generateHash = password => {
 };
 
 const userInit = async () => {
-  await models.user.sync({ force: true });
+  await models.user.sync();
   await models.user.create({ firstName: "Admin", lastName: "Tester", email: "admin@email.com", password: generateHash("admin"), role: ROLE.Admin });
   await models.user.create({ firstName: "Manager", lastName: "Tester", email: "manager@email.com", password: generateHash("manager"), role: ROLE.Manager });
   await models.user.create({ firstName: "Sales", lastName: "Tester", email: "sales@email.com", password: generateHash("sales"), role: ROLE.Sales });
@@ -82,7 +82,7 @@ const userInit = async () => {
 models.sequelize
   .sync()
   .then(function () {
-    userInit();
+    // userInit();
     io.of('/stream').on('connection', stream);
 
     server.listen(port, function (err) {
