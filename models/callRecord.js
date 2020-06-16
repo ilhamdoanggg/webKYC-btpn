@@ -9,8 +9,9 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.STRING,
           allowNull: true,    
       },
-      sheduleTime: {
+      scheduleTime: {
           type: Sequelize.DATE,
+          defaultValue: Sequelize.NOW,
       },
       SMSLink: {
           type: Sequelize.STRING,
