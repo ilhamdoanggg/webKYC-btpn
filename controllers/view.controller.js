@@ -2,6 +2,7 @@ const ROLES = require('../utils/roles');
 const { checkIsInRole, isLoggedIn } = require('../utils/auth');
 const sendMessage = require('../utils/sendNotifMessage')
 const customerService = require('../services/customer.service');
+const User = require('../models').user;
 
 module.exports = (app) => {
   app.get('/sales/home', isLoggedIn, (req, res) => {
@@ -79,7 +80,7 @@ module.exports = (app) => {
   });
 
   app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
-    const customerId = req.query.room;
+    const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
         // if (room) {
@@ -153,12 +154,15 @@ module.exports = (app) => {
 
   // Debitur
   app.get('/debitur', (req, res) => {
-    const customerId = req.query.room;
+    const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
-        res.render('pages/ui-debitur', {
-          isGuest: true,
-          customer: customer,
+        User.findById(customer.salesId).then(user => {
+          res.render('pages/ui-debitur', {
+            isGuest: true,
+            customer: customer,
+            salesName: user.firstName + " " + user.lastName,
+          });
         });
       });
   });

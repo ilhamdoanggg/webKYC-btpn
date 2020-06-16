@@ -15,7 +15,7 @@ exports.addNew = async (payload) => {
         salesId: payload.salesId
     })
     .then(callRecord => {
-        customer.update({activityId: 2});
+        customer.update({activityId: 2, salesId: payload.salesId});
         createFolder(customerFolderName);
         result = { isSuccess: true, message: `Success add new call record` };
     }).catch(function (err) {
