@@ -63,7 +63,7 @@ module.exports = (app) => {
   });
 
   // route confirmations
-  app.get('/sales/confirmation', isLoggedIn, (req, res) => {
+  app.get('/sales/confirmation', (req, res) => {
     customerService.findAll()
       .then(customers => {
         res.render('pages/confirmation', {
@@ -78,7 +78,7 @@ module.exports = (app) => {
       })
   });
 
-  app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
+  app.get('/sales/videocall-confirmation', (req, res) => {
     const customerId = req.query.room;
     customerService.findById(customerId)
       .then(customer => {
