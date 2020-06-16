@@ -38,16 +38,22 @@
                 <div class="tab-pane fade show active" id="tab-tools" role="tabpanel" aria-labelledby="tab-tools">
                     <div class="mt-2">
                         <button class="btn btn-warning btn-block">Video Call</button>
-                        <button class="btn btn-warning btn-block">Send File</button>
+                        {{!-- <button class="btn btn-warning btn-block">Send File</button> --}}
                         <button class="btn btn-warning btn-block">Request End Call</button>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="tab-chat" role="tabpanel" aria-labelledby="tab-chat">
                     <div class="mt-3" id='chat-pane'>
                         <div id='chat-messages'></div>
-                        <div class="row">
-                            <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3'
-                                placeholder="Type here... and press the enter"></textarea>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-10">
+                                <textarea id='chat-input' class="form-control rounded-0 border" rows='2'
+                                    placeholder="Type here... and press the enter"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <button title="Upload document" id="btn-document" class="btn btn-primary ml-2"><i
+                                        class="fas fa-file-upload"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
