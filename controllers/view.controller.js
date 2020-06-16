@@ -79,7 +79,7 @@ module.exports = (app) => {
   });
 
   app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
-    const customerId = req.query.room;
+    const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
         // if (room) {
@@ -153,7 +153,7 @@ module.exports = (app) => {
 
   // Debitur
   app.get('/debitur', (req, res) => {
-    const customerId = req.query.room;
+    const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
         res.render('pages/ui-debitur', {
