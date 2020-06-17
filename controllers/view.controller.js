@@ -157,13 +157,13 @@ module.exports = (app) => {
     const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
-        User.findById(customer.salesId).then(user => {
-          res.render('pages/ui-debitur', {
-            isGuest: true,
-            customer: customer,
-            salesName: user.firstName + " " + user.lastName,
-          });
+        // User.findById(customer.salesId).then(user => {
+        res.render('pages/ui-debitur', {
+          isGuest: true,
+          customer: customer,
+          salesName: user.firstName + " " + user.lastName,
         });
+        // });
       });
   });
 };
