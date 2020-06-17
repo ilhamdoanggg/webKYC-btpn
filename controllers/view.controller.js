@@ -161,7 +161,7 @@ module.exports = (app) => {
         res.render('pages/ui-debitur', {
           isGuest: true,
           customer: customer,
-          salesName: user.firstName + " " + user.lastName,
+          // salesName: user.firstName + " " + user.lastName,
         });
         // });
       });
