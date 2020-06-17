@@ -237,11 +237,10 @@ export default {
     },
 
 
-    saveRecordedStream(stream, user) {
+    saveRecordedStream(stream, data) {
         let blob = new Blob(stream, { type: 'video/webm' });
-
-        let file = new File([blob], `${user}-${moment().unix()}-record.webm`);
-
+        let file = new File([blob], `${data.name}-${moment().unix()}-record.webm`);
+    
         saveAs(file);
     },
 

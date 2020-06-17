@@ -339,8 +339,12 @@ window.addEventListener('load', () => {
 
         mediaRecorder.onstop = function () {
             toggleRecordingIcons(false);
+            let data = {
+                name: username,
+                salesId: sessionStorage.getItem('salesId'),
+            }
 
-            h.saveRecordedStream(recordedStream, username);
+            h.saveRecordedStream(recordedStream, data);
 
             setTimeout(() => {
                 recordedStream = [];

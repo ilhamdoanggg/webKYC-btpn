@@ -22,7 +22,7 @@
 
 #chat-messages{
     overflow: scroll;
-    height: 440px;
+    height: 75vh;
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
