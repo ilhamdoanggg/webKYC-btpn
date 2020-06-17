@@ -82,7 +82,7 @@ const userInit = async () => {
 models.sequelize
   .sync()
   .then(function () {
-    userInit();
+    // userInit();
     io.of('/stream').on('connection', stream);
 
     server.listen(port, function (err) {
