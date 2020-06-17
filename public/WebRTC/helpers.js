@@ -129,7 +129,7 @@ export default {
             senderName = data.sender;
             msgBg = '';
 
-            this.toggleChatNotificationBadge();
+            // this.toggleChatNotificationBadge();
         }
 
         let infoDiv = document.createElement('div');
@@ -240,7 +240,7 @@ export default {
     saveRecordedStream(stream, data) {
         let blob = new Blob(stream, { type: 'video/webm' });
         let file = new File([blob], `${data.name}-${moment().unix()}-record.webm`);
-    
+
         saveAs(file);
     },
 

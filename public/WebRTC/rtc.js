@@ -111,6 +111,10 @@ window.addEventListener('load', () => {
 
 
         socket.on('chat', (data) => {
+            console.log("ini data remote");
+
+            console.log(data);
+
             h.addChat(data, 'remote');
         });
     });
@@ -457,7 +461,7 @@ window.addEventListener('load', () => {
             if (screen && screen.getVideoTracks().length) {
                 startRecording(screen);
             }
-    
+
             else {
                 h.shareScreen().then((screenStream) => {
                     startRecording(screenStream);

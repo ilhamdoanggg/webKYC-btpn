@@ -15,14 +15,14 @@ window.addEventListener('load', () => {
     helpers.disableButton(btn, event)
 
     //When the chat icon is clicked
-    document.querySelector('#nav-chat-tab').addEventListener('click', (e) => {
-        //remove the 'New' badge on chat icon (if any) once chat is opened.
-        setTimeout(() => {
-            if (document.querySelector('#chat-pane').classList.contains('chat-opened')) {
-                helpers.toggleChatNotificationBadge();
-            }
-        }, 300);
-    });
+    // document.querySelector('#nav-chat-tab').addEventListener('click', (e) => {
+    //     //remove the 'New' badge on chat icon (if any) once chat is opened.
+    //     setTimeout(() => {
+    //         if (document.querySelector('#chat-pane').classList.contains('chat-opened')) {
+    //             helpers.toggleChatNotificationBadge();
+    //         }
+    //     }, 300);
+    // });
 
 
     //When the video frame is clicked. This will enable picture-in-picture
