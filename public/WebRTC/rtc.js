@@ -360,6 +360,19 @@ window.addEventListener('load', () => {
         };
     }
 
+    function getFileHTML(file) {
+        var url = file.url || URL.createObjectURL(file);
+        var attachment = '<a href="' + url + '" target="_blank" download="' + file.name + '">Download: <b>' + file.name + '</b></a>';
+        if (file.name.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+            attachment += '<br><img crossOrigin="anonymous" src="' + url + '">';
+        } else if (file.name.match(/\.wav|\.mp3/gi)) {
+            attachment += '<br><audio src="' + url + '" controls></audio>';
+        } else if (file.name.match(/\.pdf|\.js|\.txt|\.sh/gi)) {
+            attachment += '<iframe class="inline-iframe" src="' + url + '"></iframe></a>';
+        }
+        return attachment;
+    }
+
 
     //Chat textarea
     document.getElementById('chat-input').addEventListener('keypress', (e) => {
@@ -381,8 +394,8 @@ window.addEventListener('load', () => {
         inputFile.type = 'file';
         inputFile.onchange = e => {
             const file = e.target.files[0];
-            const linkDoc = `Klik to Download : <a href='#' download="${file}" class='btn btn-link'>${file.name}</a>`
-            sendMsg(linkDoc)
+            const linkFile = getFileHTML(file);
+            sendMsg(linkFile)
         }
         inputFile.click();
     })
