@@ -5,8 +5,11 @@
 import h from './helpers.js';
 
 window.addEventListener('load', () => {
-    const room = h.getQString(location.href, 'room');
+    const room = h.getQString(location.href, 'id');
     const username = sessionStorage.getItem('username');
+
+    console.log(room);
+
 
     // if (!room) {
     //     document.querySelector('#room-create').attributes.removeNamedItem('hidden');
