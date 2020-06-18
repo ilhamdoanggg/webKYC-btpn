@@ -348,7 +348,7 @@ window.addEventListener('load', () => {
             toggleRecordingIcons(false);
             let data = {
                 name: username,
-                salesId: sessionStorage.getItem('salesId'),
+                customerId: h.getQString(location.href, 'id'),
             }
 
             h.saveRecordedStream(recordedStream, data);

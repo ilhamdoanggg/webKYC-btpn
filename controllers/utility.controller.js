@@ -30,6 +30,7 @@ module.exports = (app) => {
 
     app.post('/upload-file/:customerId', upload.single('file'), (req, res) => {
         const customerId = req.params.customerId;
+        console.log("Customer id : ", customerId);
         callRecordService.findByCustomerId(customerId).then(callRecord => {
             let dirTarget = callRecord.folderName;        
             moveFileToStorage(dirTarget, req.file);

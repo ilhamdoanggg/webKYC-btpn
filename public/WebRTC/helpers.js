@@ -241,7 +241,18 @@ export default {
         let blob = new Blob(stream, { type: 'video/webm' });
         let file = new File([blob], `${data.name}-${moment().unix()}-record.webm`);
 
-        saveAs(file);
+        let formData = new FormData();
+        formData.append('file', file);
+
+        $.ajax(`/upload-file/${data.customerId}`, {
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                alert('Record successfully saved');
+            }
+        });
     },
 
 
