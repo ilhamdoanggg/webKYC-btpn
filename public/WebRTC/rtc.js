@@ -455,25 +455,58 @@ window.addEventListener('load', () => {
 
 
     //When user clicks the 'Share screen' button
-    document.getElementById('share-screen').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (screen && screen.getVideoTracks().length && screen.getVideoTracks()[0].readyState != 'ended') {
-            stopSharingScreen();
-        }
+    try {
+        document.getElementById('share-screen').addEventListener('click', (e) => {
+            e.preventDefault();
+            if (screen && screen.getVideoTracks().length && screen.getVideoTracks()[0].readyState != 'ended') {
+                stopSharingScreen();
+            }
 
-        else {
-            shareScreen();
-        }
-    });
+            else {
+                shareScreen();
+            }
+        });
+    } catch (error) {
+
+    }
+
 
 
     //When record button is clicked
-    document.getElementById('record').addEventListener('click', (e) => {
-        /**
-         * Ask user what they want to record.
-         * Get the stream based on selection and start recording
-         */
-        if (!mediaRecorder || mediaRecorder.state == 'inactive') {
+    try {
+        document.getElementById('record').addEventListener('click', (e) => {
+            /**
+             * Ask user what they want to record.
+             * Get the stream based on selection and start recording
+             */
+            if (!mediaRecorder || mediaRecorder.state == 'inactive') {
+                if (screen && screen.getVideoTracks().length) {
+                    startRecording(screen);
+                }
+
+                else {
+                    h.shareScreen().then((screenStream) => {
+                        startRecording(screenStream);
+                    }).catch(() => { });
+                }
+            }
+
+            else if (mediaRecorder.state == 'paused') {
+                mediaRecorder.resume();
+            }
+
+            else if (mediaRecorder.state == 'recording') {
+                mediaRecorder.stop();
+            }
+        });
+    } catch (error) {
+
+    }
+
+    try {
+        document.getElementById('record-screen').addEventListener('click', () => {
+            h.toggleModal('recording-options-modal', false);
+
             if (screen && screen.getVideoTracks().length) {
                 startRecording(screen);
             }
@@ -483,28 +516,9 @@ window.addEventListener('load', () => {
                     startRecording(screenStream);
                 }).catch(() => { });
             }
-        }
+        });
+    } catch (error) {
 
-        else if (mediaRecorder.state == 'paused') {
-            mediaRecorder.resume();
-        }
+    }
 
-        else if (mediaRecorder.state == 'recording') {
-            mediaRecorder.stop();
-        }
-    });
-
-    document.getElementById('record-screen').addEventListener('click', () => {
-        h.toggleModal('recording-options-modal', false);
-
-        if (screen && screen.getVideoTracks().length) {
-            startRecording(screen);
-        }
-
-        else {
-            h.shareScreen().then((screenStream) => {
-                startRecording(screenStream);
-            }).catch(() => { });
-        }
-    });
 });

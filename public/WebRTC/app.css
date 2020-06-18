@@ -168,6 +168,18 @@
     width: 80%;
 }
 
+.bg-canvas{
+ background-image: url('/assets/images/doc_kredit_pensiun.jpeg');
+ background-repeat: no-repeat;
+ background-size: auto;
+}
+
+.signature-pen{
+    min-height: 60vh; 
+    min-width: 50vh;
+    z-index: 9999;
+}
+
 
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
