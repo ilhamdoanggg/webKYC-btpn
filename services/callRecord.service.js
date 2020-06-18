@@ -25,3 +25,15 @@ exports.addNew = async (payload) => {
 
     return result;
 }
+
+exports.findByCustomerId = async (customerId) => {
+    let result;
+
+    await CallRecord.findOne({
+        where: {customerId: customerId}
+    }).then(callRecord => {
+        result = callRecord;
+    })
+
+    return result;
+}

@@ -10,6 +10,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const stream = require('./utils/stream');
 const flash = require('connect-flash');
+const fileSystem = require('./utils/fileSystem');
 
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -63,6 +64,10 @@ require('./config/passport/passport.js')(passport, models.user);
 
 // Initialize port
 const port = process.env.PORT || 3000
+
+
+// Initialize storage temp
+fileSystem.createFolder('temp');
 
 const bCrypt = require('bcrypt-nodejs');
 const ROLE = require('./utils/roles');
