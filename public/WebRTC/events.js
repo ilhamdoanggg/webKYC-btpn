@@ -1,29 +1,6 @@
 import helpers from './helpers.js';
 
 window.addEventListener('load', () => {
-    // deklarasi button
-    let btn = {
-        btnEndCall: document.querySelector('#btn-endcall'),
-        btnVideoCall: document.querySelector('#btn-video-call'),
-        btnSendFile: document.querySelector('#btn-send-file'),
-        btnDocument: document.querySelector('#btn-document'),
-        btnResult: document.querySelector('#btn-result'),
-        btnPen: document.querySelector('#btn-pen')
-    }
-    // disable button
-    let event = sessionStorage.getItem('btn');
-    helpers.disableButton(btn, event)
-
-    //When the chat icon is clicked
-    // document.querySelector('#nav-chat-tab').addEventListener('click', (e) => {
-    //     //remove the 'New' badge on chat icon (if any) once chat is opened.
-    //     setTimeout(() => {
-    //         if (document.querySelector('#chat-pane').classList.contains('chat-opened')) {
-    //             helpers.toggleChatNotificationBadge();
-    //         }
-    //     }, 300);
-    // });
-
 
     //When the video frame is clicked. This will enable picture-in-picture
     document.getElementById('local').addEventListener('click', () => {
@@ -44,34 +21,15 @@ window.addEventListener('load', () => {
         }
     });
 
-    btn.btnEndCall.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.history.back();
-        sessionStorage.setItem('btn', null)
-    });
-
-
-    //When the 'Enter room' button is clicked.
-    // document.getElementById('enter-room').addEventListener('click', (e) => {
-    //     e.preventDefault();
-
-    //     let name = document.querySelector('#username').value;
-
-    //     if (name) {
-    //         //remove error message, if any
-    //         document.querySelector('#err-msg-username').innerHTML = "";
-
-    //         //save the user's name in sessionStorage
-    //         sessionStorage.setItem('username', name);
-
-    //         //reload room
-    //         location.reload();
-    //     }
-
-    //     else {
-    //         document.querySelector('#err-msg-username').innerHTML = "Please input your name";
-    //     }
-    // });
+    // event btn endcall 
+    const btnEndCall = document.querySelector('#btn-endcall');
+    if (btnEndCall !== null) {
+        document.querySelector('#btn-endcall').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.history.back();
+            sessionStorage.setItem('btn', null)
+        });
+    }
 
 
     document.addEventListener('click', (e) => {
@@ -84,8 +42,12 @@ window.addEventListener('load', () => {
         }
     });
 
+    try {
+        document.getElementById('closeModal').addEventListener('click', () => {
+            helpers.toggleModal('recording-options-modal', false);
+        });
+    } catch (error) {
 
-    document.getElementById('closeModal').addEventListener('click', () => {
-        helpers.toggleModal('recording-options-modal', false);
-    });
+    }
+
 });
