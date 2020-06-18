@@ -22,7 +22,7 @@
 
 #chat-messages{
     overflow: scroll;
-    height: 75vh;
+    min-height: 75vh;
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
@@ -167,14 +167,10 @@
     border: 1px solid #17a2b8;
     width: 80%;
 }
-
-.bg-canvas{
- background-image: url('/assets/images/doc_kredit_pensiun.jpeg');
- background-repeat: no-repeat;
- background-size: auto;
-}
-
 .signature-pen{
+    background-image: url('/assets/images/doc_kredit_pensiun.jpeg');
+    background-repeat: no-repeat;
+    background-size: auto;
     min-height: 60vh; 
     min-width: 50vh;
     z-index: 9999;
