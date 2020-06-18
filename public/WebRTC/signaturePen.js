@@ -1,18 +1,21 @@
 const canvas = document.querySelector('canvas');
 const signaturePad = new SignaturePad(canvas);
 
+canvas.width = 700;
+canvas.height = 893;
+
 
 signaturePad.minWidth = 1;
 signaturePad.maxWidth = 2;
 signaturePad.penColor = "rgb(0,0,0)";
 
-function resizeCanvas() {
-    var ratio = Math.max(window.devicePixelRatio || 1, 1);
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
-    canvas.getContext("2d").scale(ratio, ratio);
-    signaturePad.clear(); // otherwise isEmpty() might return incorrect value
-}
+// function resizeCanvas() {
+//     var ratio = Math.max(window.devicePixelRatio || 1, 1);
+//     canvas.width = canvas.offsetWidth * ratio;
+//     canvas.height = canvas.offsetHeight * ratio;
+//     canvas.getContext("2d").scale(ratio, ratio);
+//     signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+// }
 
 // document.getElementById('btn-save-canvas').addEventListener('click', saveCanvas);
 document.getElementById('btn-clear-canvas').addEventListener('click', clearCanvas);
@@ -64,4 +67,4 @@ function dataURLToBlob(dataURL) {
     return new Blob([uInt8Array], { type: contentType });
 }
 
-window.onresize = resizeCanvas;
+// window.onresize = resizeCanvas;
