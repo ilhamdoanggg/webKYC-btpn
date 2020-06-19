@@ -8,7 +8,8 @@ module.exports = (app) => {
   app.get('/sales/home', isLoggedIn, (req, res) => {
     res.render('pages/home', {
       user: req.user,
-      pageTitle: 'Menu Utama'
+      pageTitle: 'Menu Utama',
+      isManager: req.user.role === ROLES.Manager ? true : false,
     });
   });
 
@@ -83,14 +84,6 @@ module.exports = (app) => {
     const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
-        // if (room) {
-        //   const path = req.originalUrl.replace('sales/videocall-confirmation/', 'debitur');
-        //   const data = {
-        //     number: customer.phoneNumber,
-        //     link: `https://${req.get('host')}${path}`
-        //   }
-        //   // sendMessage(data);
-        // }
         res.render('pages/videocall-confirmation', {
           user: req.user,
           customer: customer,
@@ -100,8 +93,6 @@ module.exports = (app) => {
         console.log(err);
         return res.redirect('back')
       })
-
-
   });
 
   app.get('/sales/slik-checking', isLoggedIn, (req, res) => {
@@ -138,18 +129,35 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/sales/videocall-verification', isLoggedIn, (req, res) => {
-    res.render('pages/videocall-verification', {
-      user: req.user,
-      pageTitle: 'Verification'
-    });
+  app.get('/sales/videocall-verification', checkIsInRole(ROLES.Manager), isLoggedIn, (req, res) => {
+    const customerId = req.query.id;
+    customerService.findById(customerId)
+      .then(customer => {
+        res.render('pages/videocall-verification', {
+          user: req.user,
+          customer: customer,
+          pageTitle: 'Verification'
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        return res.redirect('back')
+      })
   });
 
-  app.get('/sales/verification', isLoggedIn, (req, res) => {
-    res.render('pages/verification', {
-      user: req.user,
-      pageTitle: 'Verification'
-    });
+  app.get('/sales/verification', isLoggedIn, checkIsInRole(ROLES.Manager), (req, res) => {
+    customerService.findAll()
+      .then(customers => {
+        res.render('pages/verification', {
+          user: req.user,
+          customers,
+          pageTitle: 'Verification'
+        }
+        );
+      })
+      .catch(function (err) {
+        return null;
+      })
   });
 
   // Debitur

@@ -35,15 +35,15 @@ window.addEventListener('load', () => {
             html2canvas(document.getElementById('content-canvas'))
                 .then(canvas => {
                     let data = {
+                        name: username,
                         room: room,
-                        msg: `Sudah Upload File Persetujuan`,
-                        sender: username,
+                        msg: `Berhasil Upload File Persetujuan`,
+                        sender: 'BTPN Info',
                         customerId: h.getQString(location.href, 'id')
                     };
 
                     const fileB64 = canvas.toDataURL("image/png");
                     socket.emit('chat', data) // emit chat 
-                    // h.addChat(data, 'local');
                     h.saveFileCanvas(fileB64, data); // save file to strorage
                     const fileNameCanvas = `${data.name}-${moment().unix()}-lembar-persetujuan.png`;
                     const a = document.createElement("a"); //Create <a>

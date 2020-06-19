@@ -1,51 +1,45 @@
 {{> header}}
 {{> welcome}}
-
 <div class="container mt-3">
     <div class="table-responsive">
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">NO</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Nopen</th>
                     <th scope="col">No telp</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
+                {{#each customers}}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>1234567</td>
-                    <td>0213435353</td>
-                    <td>
-                        <a href="/sales/videocall-verification" class="btn btn-link">
-                            <i class="fas fa-tasks"></i> Waiting verifikasi </a>
+                    <th scope="row">{{counter @index}}</th>
+                    <td>{{name}}</td>
+                    <td>{{customerNumber}}</td>
+                    <td>{{phoneNumber}}</td>
+                    <td class="text-center">
+                        <a href="/sales/videocall-verification?id={{id}}"
+                            onclick="callingCustomer({customerId: '{{id}}', salesId: '{{../user.id}}'})"
+                            class="btn btn-success btn-block">
+                            <i class="fas fa-phone-square-alt"></i> Waiting Verifikasi</a>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jhon</td>
-                    <td>12323121321</td>
-                    <td>0212234234</td>
-                    <td>
-                        <a href="/sales/videocall-verification" class="btn btn-link">
-                            <i class="fas fa-tasks"></i> Waiting verifikasi</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Angel</td>
-                    <td>2344212124</td>
-                    <td>121212414</td>
-                    <td>
-                        <a href="/sales/videocall-verification" class="btn btn-link">
-                            <i class="fas fa-tasks"></i> Waiting verifikasi</a>
-                    </td>
-                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    function callingCustomer(data) {
+        $.ajax('/calling-customer', {
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json'
+        });
+    }
+</script>
+
 {{> footer}}
