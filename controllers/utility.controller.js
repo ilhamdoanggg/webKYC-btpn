@@ -1,4 +1,5 @@
 const callRecordService = require('../services/callRecord.service');
+const customerService = require('../services/customer.service');
 const multer = require('multer');
 const { moveFileToStorage, saveFileToTemp } = require('../utils/fileSystem');
 const tempDir = './storages/temp';
@@ -45,5 +46,12 @@ module.exports = (app) => {
         let dir = __basedir + '/storages/temp/';
         let filename = req.params.filename;
         res.download(dir + filename);
+    });
+
+    app.get('/download-file/:filename/:customerId', async (req, res) => {
+        let filename = req.params.filename;
+        const customer = await customerService.findById(req.params.customerId);
+        let customerFolderName = __basedir + '/storages/' + customer.name + "_" + customer.customerNumber + "/";
+        return res.download(customerFolderName + filename);
     });
 }

@@ -3,6 +3,7 @@ const { checkIsInRole, isLoggedIn } = require('../utils/auth');
 const sendMessage = require('../utils/sendNotifMessage')
 const customerService = require('../services/customer.service');
 const User = require('../models').user;
+const {createFolder, getAllListByFolderName} = require('../utils/fileSystem');
 
 module.exports = (app) => {
   app.get('/sales/home', isLoggedIn, (req, res) => {
@@ -157,6 +158,25 @@ module.exports = (app) => {
       })
       .catch(function (err) {
         return null;
+      })
+  });
+
+  app.get('/directory/:customerId', (req, res) => {
+    const customerId = req.params.customerId;
+    customerService.findById(customerId)
+      .then(customer => {
+        let customerFolderName = customer.name + "_" + customer.customerNumber;
+        createFolder(customerFolderName);
+        const fs = require('fs');
+        let dir = __basedir + `/storages/${customerFolderName}/`;
+        fs.readdir(dir, (err, files) => {
+          res.render('pages/directory', {
+              user: req.user,
+              customer,
+              files,
+              pageTitle: 'Directory'
+            });
+        })
       })
   });
 

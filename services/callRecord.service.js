@@ -4,9 +4,8 @@ const {createFolder} = require('../utils/fileSystem');
 
 exports.addNew = async (payload) => {
     let result;
-    const dateNow = new Date().toISOString().slice(0, 10);
     const customer = await customerService.findById(payload.customerId);
-    let customerFolderName = customer.name + "_" + customer.customerNumber + "_" + dateNow;
+    let customerFolderName = customer.name + "_" + customer.customerNumber;
 
     if (!await this.isExistByCustomerId(payload.customerId)) {
         CallRecord.create({

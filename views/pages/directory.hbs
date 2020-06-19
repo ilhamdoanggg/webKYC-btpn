@@ -1,0 +1,23 @@
+{{> header}}
+{{> welcome}}
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">List file of {{customer.name}}</h5>
+            <div class="row mx-0">
+                {{#each files}}
+                    <div class="col-sm-3 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this}}</h5>
+                                <a href="/download-file/{{this}}/{{../customer.id}}" class="card-link">Download file</a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> footer}}
