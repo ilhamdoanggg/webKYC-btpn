@@ -3,7 +3,7 @@ const { checkIsInRole, isLoggedIn } = require('../utils/auth');
 const sendMessage = require('../utils/sendNotifMessage')
 const customerService = require('../services/customer.service');
 const User = require('../models').user;
-const {createFolder, getAllListByFolderName} = require('../utils/fileSystem');
+const { createFolder, getAllListByFolderName } = require('../utils/fileSystem');
 
 module.exports = (app) => {
   app.get('/sales/home', isLoggedIn, (req, res) => {
@@ -11,6 +11,7 @@ module.exports = (app) => {
       user: req.user,
       pageTitle: 'Menu Utama',
       isManager: req.user.role === ROLES.Manager ? true : false,
+      isAdmin: req.user.role === ROLES.Admin ? true : false,
     });
   });
 
@@ -171,15 +172,33 @@ module.exports = (app) => {
         let dir = __basedir + `/storages/${customerFolderName}/`;
         fs.readdir(dir, (err, files) => {
           res.render('pages/directory', {
-              user: req.user,
-              customer,
-              files,
-              pageTitle: 'Directory'
-            });
+            user: req.user,
+            customer,
+            files,
+            pageTitle: 'Directory'
+          });
         })
       })
   });
 
+  app.get('/sales/administration', isLoggedIn, checkIsInRole(ROLES.Admin), (req, res) => {
+    // customerService.findAll()
+    //   .then(customers => {
+    //     res.render('pages/administration', {
+    //       user: req.user,
+    //       customers,
+    //       pageTitle: 'Verification'
+    //     }
+    //     );
+    //   })
+    //   .catch(function (err) {
+    //     return null;
+    //   })
+    res.render('pages/administration', {
+      user: req.user,
+      pageTitle: 'Administration'
+    });
+  });
   // Debitur
   app.get('/debitur', (req, res) => {
     const customerId = req.query.id;
