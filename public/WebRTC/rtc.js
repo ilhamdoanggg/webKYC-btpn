@@ -114,10 +114,6 @@ window.addEventListener('load', () => {
 
 
         socket.on('chat', (data) => {
-            console.log("ini data remote");
-
-            console.log(data);
-
             h.addChat(data, 'remote');
         });
     });
@@ -363,17 +359,32 @@ window.addEventListener('load', () => {
         };
     }
 
-    function getFileHTML(file) {
-        var url = file.url || URL.createObjectURL(file);
-        var attachment = '<a href="' + url + '" target="_blank" download="' + file.name + '">Download: <b>' + file.name + '</b></a>';
-        if (file.name.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-            attachment += '<br><img crossOrigin="anonymous" src="' + url + '">';
-        } else if (file.name.match(/\.wav|\.mp3/gi)) {
-            attachment += '<br><audio src="' + url + '" controls></audio>';
-        } else if (file.name.match(/\.pdf|\.js|\.txt|\.sh/gi)) {
-            attachment += '<iframe class="inline-iframe" src="' + url + '"></iframe></a>';
-        }
-        return attachment;
+    function uploadFile(payload) {
+        let formData = new FormData();
+        formData.append('file', payload);
+        return $.ajax(`/upload-file/`, {
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false
+        });
+    }
+
+    function getFileHTML(payload) {
+        return uploadFile(payload).then(file => {
+            let url = "/download-file/" + file.filename;
+
+            var attachment = '<a href="' + url + '" target="_blank" download="' + file.filename + '">Download: <b>' + file.filename + '</b></a>';
+            if (file.filename.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
+                attachment += '<br><img crossOrigin="anonymous" src="' + url + '">';
+            } else if (file.filename.match(/\.wav|\.mp3/gi)) {
+                attachment += '<br><audio src="' + url + '" controls></audio>';
+            } else if (file.filename.match(/\.pdf|\.js|\.txt|\.sh/gi)) {
+                attachment += '<iframe class="inline-iframe" src="' + url + '"></iframe></a>';
+            }
+
+            return attachment;
+        });
     }
 
 
@@ -390,14 +401,16 @@ window.addEventListener('load', () => {
         }
     });
 
+
+
     // upload document
     document.getElementById('btn-document').addEventListener('click', (e) => {
         e.preventDefault();
         let inputFile = document.createElement('input');
         inputFile.type = 'file';
-        inputFile.onchange = e => {
+        inputFile.onchange = async e => {
             const file = e.target.files[0];
-            const linkFile = getFileHTML(file);
+            const linkFile = await getFileHTML(file);
             sendMsg(linkFile)
         }
         inputFile.click();

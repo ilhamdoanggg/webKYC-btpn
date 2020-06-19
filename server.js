@@ -83,6 +83,8 @@ const userInit = async () => {
   await models.user.create({ firstName: "Sales", lastName: "Tester", email: "sales@email.com", password: generateHash("sales"), role: ROLE.Sales });
 }
 
+global.__basedir = __dirname;
+
 // Sync Database
 models.sequelize
   .sync()

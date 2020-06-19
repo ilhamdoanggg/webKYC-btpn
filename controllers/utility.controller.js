@@ -1,6 +1,6 @@
 const callRecordService = require('../services/callRecord.service');
 const multer = require('multer');
-const { moveFileToStorage } = require('../utils/fileSystem');
+const { moveFileToStorage, saveFileToTemp } = require('../utils/fileSystem');
 const tempDir = './storages/temp';
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -30,11 +30,20 @@ module.exports = (app) => {
 
     app.post('/upload-file/:customerId', upload.single('file'), (req, res) => {
         const customerId = req.params.customerId;
-        console.log("Customer id : ", customerId);
         callRecordService.findByCustomerId(customerId).then(callRecord => {
             let dirTarget = callRecord.folderName;        
             moveFileToStorage(dirTarget, req.file);
             res.status(200).send("Success upload file");
         })
     })
+
+    app.post('/upload-file/', upload.single('file'), (req, res) => {
+        res.status(200).send(req.file);
+    });
+
+    app.get('/download-file/:filename', (req, res) => {
+        let dir = __basedir + '/storages/temp/';
+        let filename = req.params.filename;
+        res.download(dir + filename);
+    });
 }
