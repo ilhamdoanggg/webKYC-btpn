@@ -73,17 +73,15 @@
                         <div class="text-center mt-2">
                             <button id="btn-clear-canvas" type="button" class="btn btn-sm btn-info" data-action="clear"
                                 title="Hapus Pen"><i class="fas fa-eraser"></i></button>
-                            {{!-- <button id="btn-save-canvas" type="button" class="btn btn-sm btn-primary"
-                                                            data-action="save-jpg">Save as
-                                                            JPG</button> --}}
+                            <button id="btn-save-canvas" type="button" class="btn btn-sm btn-primary"
+                                data-action="save-jpg"><i class="fas fa-upload"></i> Save and Upload</button>
                         </div>
-                        <canvas class="signature-pen mb-5"></canvas>
+                        <div id="content-canvas">
+                            <canvas class="signature-pen mb-5"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-            {{!-- <div class="room-comm" hidden>
-                <div id="canvas-container"></div>
-            </div> --}}
             <div class="room-comm tools" hidden>
                 <button class="btn btn-sm rounded-0 btn-no-effect" id='toggle-video' title="Hide Video">
                     <i class="fa fa-video text-white"></i>
@@ -129,7 +127,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-    <script src='/WebRTC/signaturePen.js'></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script type="module" src='/WebRTC/signaturePen.js'></script>
     <script>
         sessionStorage.setItem('salesId', `{{user.id}}`);
         sessionStorage.setItem('username', `{{user.firstName}} {{user.lastName}}`)
