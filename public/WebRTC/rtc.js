@@ -7,10 +7,6 @@ import h from './helpers.js';
 window.addEventListener('load', () => {
     const room = h.getQString(location.href, 'id');
     const username = sessionStorage.getItem('username');
-
-    console.log(room);
-
-
     // if (!room) {
     //     document.querySelector('#room-create').attributes.removeNamedItem('hidden');
     // }
@@ -20,17 +16,6 @@ window.addEventListener('load', () => {
     // }
 
     // else {
-
-    let btn = {
-        btnEndCall: document.querySelector('#btn-endcall'),
-        btnVideoCall: document.querySelector('#btn-video-call'),
-        btnSendFile: document.querySelector('#btn-send-file'),
-        btnDocument: document.querySelector('#btn-document'),
-        btnResult: document.querySelector('#btn-result'),
-        btnPen: document.querySelector('#btn-pen')
-    }
-    // enable button
-    let eventBtn = sessionStorage.getItem('btn');
 
     let commElem = document.getElementsByClassName('room-comm');
 
@@ -114,10 +99,6 @@ window.addEventListener('load', () => {
 
 
         socket.on('chat', (data) => {
-            console.log("ini data remote");
-
-            console.log(data);
-
             h.addChat(data, 'remote');
         });
     });

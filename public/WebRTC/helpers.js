@@ -255,6 +255,33 @@ export default {
         });
     },
 
+    urltoFile(url, filename, mimeType) {
+        return (fetch(url)
+            .then(function (res) { return res.arrayBuffer(); })
+            .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
+        );
+    },
+
+    async saveFileCanvas(b64File, data) {
+        let fileCanvas;
+        const fileNameCanvas = `${data.name}-${moment().unix()}-lembar-persetujuan.png`;
+        await this.urltoFile(b64File, fileNameCanvas, 'image/png')
+            .then((file) => { fileCanvas = file })
+            .catch(err => { })
+
+        let formData = new FormData();
+        formData.append('file', fileCanvas);
+
+        $.ajax(`/upload-file/${data.customerId}`, {
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                alert('Lembar Persetujuan berhasil diupload');
+            }
+        });
+    },
 
     toggleModal(id, show) {
         let el = document.getElementById(id);
