@@ -54,4 +54,21 @@ module.exports = (app) => {
         let customerFolderName = __basedir + '/storages/' + customer.name + "_" + customer.customerNumber + "/";
         return res.download(customerFolderName + filename);
     });
+
+    app.get('/user-init', async (req, res) => {
+
+        const bCrypt = require('bcrypt-nodejs');
+        const ROLE = require('../utils/roles');
+        const models = require('../models');
+        
+        var generateHash = password => {
+          return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+        };
+
+        await models.user.sync();
+        await models.user.create({ firstName: "Admin", lastName: "Tester", email: "admin@email.com", password: generateHash("admin"), role: ROLE.Admin });
+        await models.user.create({ firstName: "Manager", lastName: "Tester", email: "manager@email.com", password: generateHash("manager"), role: ROLE.Manager });
+        await models.user.create({ firstName: "Sales", lastName: "Tester", email: "sales@email.com", password: generateHash("sales"), role: ROLE.Sales });
+        res.send(200, "Success Init")
+    })
 }
