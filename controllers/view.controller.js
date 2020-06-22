@@ -184,11 +184,11 @@ module.exports = (app) => {
 
   app.get('/sales/administration', isLoggedIn, checkIsInRole(ROLES.Admin), (req, res) => {
     userService.findAll()
-      .then(user => {
+      .then(users => {
         res.render('pages/administration', {
           user: req.user,
           pageTitle: 'Administration',
-          user,
+          users,
           messageSuccess: req.flash('messageSuccess'),
           messageError: req.flash('messageErorr'),
         });
