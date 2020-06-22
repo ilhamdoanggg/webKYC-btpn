@@ -181,7 +181,7 @@ module.exports = (app) => {
       })
   });
 
-  app.get('/sales/administration', isLoggedIn, checkIsInRole(ROLES.Admin), (req, res) => {
+  app.get('/sales/administration', (req, res) => {
     // customerService.findAll()
     //   .then(customers => {
     //     res.render('pages/administration', {
@@ -194,9 +194,23 @@ module.exports = (app) => {
     //   .catch(function (err) {
     //     return null;
     //   })
+
+    const users = [
+      {
+        name: 'aloel',
+        email: 'aloel@email.com',
+        role: 'admin'
+      },
+      {
+        name: 'Wahyudin',
+        email: 'wahyudin@email.com',
+        role: 'Manager'
+      }
+    ]
     res.render('pages/administration', {
       user: req.user,
-      pageTitle: 'Administration'
+      pageTitle: 'Administration',
+      users
     });
   });
   // Debitur
