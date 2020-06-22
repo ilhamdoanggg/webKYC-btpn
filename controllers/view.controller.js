@@ -13,6 +13,7 @@ module.exports = (app) => {
       pageTitle: 'Menu Utama',
       isManager: req.user.role === ROLES.Manager ? true : false,
       isAdmin: req.user.role === ROLES.Admin ? true : false,
+      isHomePage: true,
     });
   });
 

@@ -1,8 +1,19 @@
 <div class="container" style="margin-top: 90px;">
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-2">
+            {{#unless isHomePage}}
+                <a href="javascript:void()" onclick="goBack()"><i class="fas fa-arrow-left"></i> Kembali</a>
+            {{/unless}}
+        </div>
+        <div class="col-10">
             <h5 class="text-right">Selamat Datang, <span class="text-capitalize">{{user.firstName}}</span> <span class="text-capitalize">{{user.lastName}}</span></h5>
         </div>
     </div>
     <h1 class="text-center text-uppercase">{{pageTitle}}</h1>
 </div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
