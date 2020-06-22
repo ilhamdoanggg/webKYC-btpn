@@ -2,6 +2,7 @@ const ROLES = require('../utils/roles');
 const { checkIsInRole, isLoggedIn } = require('../utils/auth');
 const sendMessage = require('../utils/sendNotifMessage')
 const customerService = require('../services/customer.service');
+const userService = require('../services/user.service');
 const User = require('../models').user;
 const { createFolder, getAllListByFolderName } = require('../utils/fileSystem');
 
@@ -181,38 +182,19 @@ module.exports = (app) => {
       })
   });
 
-  app.get('/sales/administration', (req, res) => {
-    // customerService.findAll()
-    //   .then(customers => {
-    //     res.render('pages/administration', {
-    //       user: req.user,
-    //       customers,
-    //       pageTitle: 'Verification'
-    //     }
-    //     );
-    //   })
-    //   .catch(function (err) {
-    //     return null;
-    //   })
-
-    const users = [
-      {
-        name: 'aloel',
-        email: 'aloel@email.com',
-        role: 'admin'
-      },
-      {
-        name: 'Wahyudin',
-        email: 'wahyudin@email.com',
-        role: 'Manager'
-      }
-    ]
-    res.render('pages/administration', {
-      user: req.user,
-      pageTitle: 'Administration',
-      users
-    });
+  app.get('/sales/administration', isLoggedIn, checkIsInRole(ROLES.Admin), (req, res) => {
+    userService.findAll()
+      .then(user => {
+        res.render('pages/administration', {
+          user: req.user,
+          pageTitle: 'Administration',
+          user,
+          messageSuccess: req.flash('messageSuccess'),
+          messageError: req.flash('messageErorr'),
+        });
+      }).catch(err => { return null })
   });
+
   // Debitur
   app.get('/debitur', (req, res) => {
     const customerId = req.query.id;

@@ -58,6 +58,7 @@ app.use('/canvas-designer', express.static('node_modules/canvas-designer/'));
 require('./controllers/auth.controller.js')(app, passport);
 require('./controllers/view.controller.js')(app, passport);
 require('./controllers/customer.controller')(app);
+require('./controllers/user.controller')(app);
 require('./controllers/utility.controller')(app);
 // Load passport strategies
 require('./config/passport/passport.js')(passport, models.user);
