@@ -9,7 +9,7 @@
                     <th scope="col">Nama</th>
                     <th scope="col">Nopen</th>
                     <th scope="col">No telp</th>
-                    <th scope="col" class="text-center">Actions</th>
+                    <th scope="col" class="text-center" colspan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +19,9 @@
                     <td>{{name}}</td>
                     <td>{{customerNumber}}</td>
                     <td>{{phoneNumber}}</td>
+                    <td>
+                        <a href="/directory/{{id}}" target="_blank">Show folder customer</a>
+                    </td>
                     <td class="text-center">
                         <a href="/sales/videocall-verification?id={{id}}"
                             onclick="callingCustomer({customerId: '{{id}}', salesId: '{{../user.id}}'})"
