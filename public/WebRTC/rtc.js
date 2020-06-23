@@ -1,12 +1,10 @@
-/**
- * @author Amir Sanni <amirsanni@gmail.com>
- * @date 6th January, 2020
- */
 import h from './helpers.js';
+import api from './api.js';
 
 window.addEventListener('load', () => {
     const room = h.getQString(location.href, 'id');
     const username = sessionStorage.getItem('username');
+    const customerId = h.getQString(location.href, 'id');
     // if (!room) {
     //     document.querySelector('#room-create').attributes.removeNamedItem('hidden');
     // }
@@ -344,20 +342,9 @@ window.addEventListener('load', () => {
         };
     }
 
-    function uploadFile(payload) {
-        let formData = new FormData();
-        formData.append('file', payload);
-        return $.ajax(`/upload-file/`, {
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false
-        });
-    }
-
     function getFileHTML(payload) {
-        return uploadFile(payload).then(file => {
-            let url = "/download-file/" + file.filename;
+        return api.uploadFileToCustomer(payload).then(file => {
+            let url = "/download-file/" + file.filename + "/" + payload.customerId;
 
             var attachment = '<a href="' + url + '" target="_blank" download="' + file.filename + '">Download: <b>' + file.filename + '</b></a>';
             if (file.filename.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
@@ -395,7 +382,11 @@ window.addEventListener('load', () => {
         inputFile.type = 'file';
         inputFile.onchange = async e => {
             const file = e.target.files[0];
-            const linkFile = await getFileHTML(file);
+            let data = {
+                file: file,
+                customerId: customerId,
+            }
+            const linkFile = await getFileHTML(data);
             sendMsg(linkFile)
         }
         inputFile.click();

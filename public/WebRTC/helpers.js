@@ -1,3 +1,5 @@
+import api from './api.js';
+
 export default {
     generateRandomString() {
         return Math.random().toString(36).slice(2).substring(0, 15);
@@ -232,17 +234,13 @@ export default {
         let blob = new Blob(stream, { type: 'video/webm' });
         let file = new File([blob], `${data.name}-${moment().unix()}-record.webm`);
 
-        let formData = new FormData();
-        formData.append('file', file);
+        let form = {
+            file: file,
+            customerid: data.customerId
+        }
 
-        $.ajax(`/upload-file/${data.customerId}`, {
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function () {
-                alert('Record successfully saved');
-            }
+        api.uploadFileToCustomer(form).then( () => {
+            alert("Record screen success saved");
         });
     },
 

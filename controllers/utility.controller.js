@@ -34,7 +34,7 @@ module.exports = (app) => {
         callRecordService.findByCustomerId(customerId).then(callRecord => {
             let dirTarget = callRecord.folderName;        
             moveFileToStorage(dirTarget, req.file);
-            res.status(200).send("Success upload file");
+            res.status(200).send(req.file);
         })
     })
 
