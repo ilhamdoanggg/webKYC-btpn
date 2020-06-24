@@ -52,4 +52,21 @@ module.exports = (app) => {
             .finally(() => { return res.redirect('back') })
     });
 
+    app.put('/update-customer/:id', (req, res) => {
+        const id = req.params.id;
+        const result = req.query.result;
+        const data = {
+            id,
+            result,
+        }
+
+        customerService.update(data)
+            .then(result => {
+                const { message, isSuccess } = result;
+                if (isSuccess) req.flash('messageSuccess', message);
+                else req.flash('messageErorr', message);
+            })
+            .catch(err => console.error(err))
+            .finally(() => { return res.redirect('/home') })
+    })
 }
