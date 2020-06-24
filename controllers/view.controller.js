@@ -70,10 +70,7 @@ module.exports = (app) => {
 
   // route confirmations
   app.get('/sales/confirmation', isLoggedIn, (req, res) => {
-    let filter = {
-      result: 4,
-    }
-    customerService.findAllByFilter(filter)
+    customerService.findAllForSales()
       .then(customers => {
         res.render('pages/confirmation', {
           user: req.user,
@@ -153,10 +150,7 @@ module.exports = (app) => {
   });
 
   app.get('/sales/verification', isLoggedIn, checkIsInRole(ROLES.Manager), (req, res) => {
-    let filter = {
-      result: 6,
-    }
-    customerService.findAllByFilter(filter)
+    customerService.findAllForManager()
       .then(customers => {
         res.render('pages/verification', {
           user: req.user,

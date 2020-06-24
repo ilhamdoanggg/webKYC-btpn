@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
             }
             if (result == 0) alert('Mohon untuk pilih result');
             else api.updateResultCustomer(data);
-            window.history.back();
+            window.location.replace('/sales/home');
         });
     }
 

@@ -33,14 +33,33 @@ exports.findAll = async () => {
     return result;
 }
 
-exports.findAllByFilter = async (payload) => {
+exports.findAllForSales = async () => {
     return await Customer.findAll({
         where: {
-            [Op.or] : [{activityId: payload.activityId}, {result: payload.result}]
+            [Op.or] : [
+                {activityId: {
+                    [Op.lt] : 3
+                }}, 
+                {result: 4}
+            ]
         }
     }).then(customers => {
         return customers;
     })
+}
+
+exports.findAllForManager = async () => {
+    return await Customer.findAll({
+        where: {
+            [Op.or] : [
+                {result: {
+                    [Op.gte]: 6
+                }}
+            ]
+        }
+    }).then(customers => {
+        return customers;
+    });
 }
 
 exports.findById = async (id) => {

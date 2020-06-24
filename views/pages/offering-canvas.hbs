@@ -30,19 +30,19 @@
         <h3>Result : </h3>
         <div class="input-group">
             <div class="input-group-text mr-1 mb-1">
-                <input type="radio" value="0" name="result" aria-label="Pre-Confirmation">
+                <input type="radio" value="1" {{#ifCond customer.result '==' 1}} checked="true" {{/ifCond}} name="result" aria-label="Pre-Confirmation">
             </div>
             <h5>Pre-Confirmation</h5>
         </div>
         <div class="input-group">
             <div class="input-group-text mr-1 mb-1">
-                <input type="radio" value="1" name="result" aria-label="Follow Up">
+                <input type="radio" value="2" {{#ifCond customer.result '==' 2}} checked="true" {{/ifCond}} name="result" aria-label="Follow Up">
             </div>
             <h5>Follow Up</h5>
         </div>
         <div class="input-group">
             <div class="input-group-text mr-1 mb-1">
-                <input type="radio" value="2" name="result" aria-label="Reject">
+                <input type="radio" value="3" {{#ifCond customer.result '==' 3}} checked="true" {{/ifCond}} name="result" aria-label="Reject">
             </div>
             <h5>Reject</h5>
         </div>
@@ -80,19 +80,19 @@
         <h3>Result : </h3>
         <div class="input-group">
             <div class="input-group-text mr-1 mb-1">
-                <input type="radio" value="0" name="result" aria-label="Pre-Confirmation">
+                <input type="radio" value="1" checked="true" name="result" aria-label="Pre-Confirmation">
             </div>
             <h5>Pre-Confirmation</h5>
         </div>
         <div class="input-group">
             <div class="input-group-text mr-1 mb-1">
-                <input type="radio" value="1" name="result" aria-label="Follow Up">
+                <input type="radio" value="2" name="result" aria-label="Follow Up">
             </div>
             <h5>Follow Up</h5>
         </div>
         <div class="input-group">
             <div class="input-group-text mr-1 mb-1">
-                <input type="radio" value="2" name="result" aria-label="Reject">
+                <input type="radio" value="3" name="result" aria-label="Reject">
             </div>
             <h5>Reject</h5>
         </div>
