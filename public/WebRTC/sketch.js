@@ -1,7 +1,8 @@
 // let socket
 let color = '#000';
-let strokeWidth = 1;
+let strokeWidth = 2;
 let cv;
+let canvas;
 
 let socket = io('/stream');
 const room = getQString(location.href, 'id');
@@ -10,7 +11,7 @@ const username = sessionStorage.getItem('username');
 function setup() {
     // Creating canvas
     cv = createCanvas(600, 765)
-    const canvas = document.getElementById('defaultCanvas0')
+    canvas = document.getElementById('defaultCanvas0')
     canvas.classList.add('border');
     document.getElementById('content-canvas').appendChild(canvas)
 
@@ -58,9 +59,27 @@ document.getElementById('btn-clear-canvas').addEventListener('click', (e) => {
     socket.emit('clear-canvas');
 })
 
-document.getElementById('btn-save-canvas').addEventListener('click', (e) => {
+document.getElementById('btn-save-canvas').addEventListener('click', async (e) => {
     e.preventDefault();
-    saveCanvas(cv, `${data.name}-${moment().unix()}-lembar-persetujuan`, 'png');
+
+    let fileName = `${username}-${moment().unix()}-lembar-persetujuan.png`;
+    saveCanvas(cv, fileName, 'png');
+
+    canvas.toBlob(function (blob) {
+        let fileCanvas = new File([blob], fileName, { type: "image/png", lastModified: Date.now() });
+        let customerId = room;
+        let formData = new FormData();
+        formData.append('file', fileCanvas);
+        $.ajax(`/upload-file/${customerId}`, {
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                alert('Lembar Persetujuan berhasil diupload');
+            }
+        });
+    })
 });
 
 // function helper
