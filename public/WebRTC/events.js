@@ -28,10 +28,12 @@ window.addEventListener('load', () => {
         document.querySelector('#btn-endcall').addEventListener('click', (e) => {
             e.preventDefault();
             let resultElement = document.getElementById('result');
+            let activityId = document.getElementById('activityId').value;
             let result = resultElement.options[resultElement.selectedIndex].value;
             let data = {
                 id: helpers.getQString(location.href, 'id'),
-                result: result,
+                activityId,
+                result,
             }
             if (result == 0) alert('Mohon untuk pilih result');
             else api.updateResultCustomer(data);
