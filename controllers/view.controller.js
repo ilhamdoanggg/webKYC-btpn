@@ -84,7 +84,7 @@ module.exports = (app) => {
       })
   });
 
-  app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
+  app.get('/sales/videocall-confirmation', (req, res) => {
     const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {

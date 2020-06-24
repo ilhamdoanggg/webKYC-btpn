@@ -25,6 +25,16 @@ function setup() {
     socket.on('clear-canvas', () => {
         clear();
     })
+
+    socket.on('bg-canvas', data => {
+        var arrayBufferView = new Uint8Array(data);
+        var blob = new Blob([arrayBufferView], { type: "image/jpeg" });
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(blob);
+
+        canvas.style.backgroundImage = `url('${imageUrl}')`;
+        canvas.style.backgroundRepeat = 'no-repeat';
+    })
 }
 
 function mouseDragged() {
@@ -81,6 +91,26 @@ document.getElementById('btn-save-canvas').addEventListener('click', async (e) =
         });
     })
 });
+
+try {
+    const btnUploadImg = document.getElementById('btn-upload-img');
+    btnUploadImg.addEventListener('click', (e) => {
+        e.preventDefault();
+        let inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.accept = "image/x-png,image/jpeg";
+        inputFile.click();
+        inputFile.onchange = e => {
+            const file = e.target.files[0];
+
+            socket.emit('bg-canvas', file); // emit file
+
+            canvas.style.backgroundImage = `url('${URL.createObjectURL(file)}')`;
+            canvas.style.backgroundRepeat = 'no-repeat';
+        }
+    })
+} catch (error) { }
+
 
 // function helper
 function getQString(url = '', keyToReturn = '') {

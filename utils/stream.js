@@ -36,6 +36,9 @@ const stream = (socket) => {
 
     socket.on('clear-canvas', () => {
         socket.broadcast.emit('clear-canvas');
+    });
+    socket.on('bg-canvas', (data) => {
+        socket.broadcast.emit('bg-canvas', data);
     })
 };
 
