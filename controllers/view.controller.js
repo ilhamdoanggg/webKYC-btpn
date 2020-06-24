@@ -154,7 +154,7 @@ module.exports = (app) => {
 
   app.get('/sales/verification', isLoggedIn, checkIsInRole(ROLES.Manager), (req, res) => {
     let filter = {
-      result = 6
+      result: 6,
     }
     customerService.findAllByFilter(filter)
       .then(customers => {
