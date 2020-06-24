@@ -107,15 +107,31 @@ export default {
 
     getIceServer() {
         return {
-            iceServers: [
-                {
-                    username: "muazkh",
-                    credential: "webrtc@live.com",
-                    urls: [
-                        "turn:numb.viagenie.ca",
+            iceServers: [{   
+                urls: [ "stun:ss-turn1.xirsys.com" ]
+            }, 
+                {   
+                    username: "J3OyXScrj2xgbIZhJEtaYKofkmZufc9QxoMMOqFQRZ13q4cLWrepizNZws38c8MaAAAAAF7zEbZ3aHlkbjEyMw==",   
+                    credential: "7dc775c0-b5f6-11ea-854d-0242ac140004",   
+                    urls: [       
+                        "turn:ss-turn1.xirsys.com:80?transport=udp",       
+                        "turn:ss-turn1.xirsys.com:3478?transport=udp",       
+                        "turn:ss-turn1.xirsys.com:80?transport=tcp",       
+                        "turn:ss-turn1.xirsys.com:3478?transport=tcp",       
+                        "turns:ss-turn1.xirsys.com:443?transport=tcp",       
+                        "turns:ss-turn1.xirsys.com:5349?transport=tcp"   
                     ]
                 }
             ]
+            // iceServers: [
+            //     {
+            //         username: "muazkh",
+            //         credential: "webrtc@live.com",
+            //         urls: [
+            //             "turn:numb.viagenie.ca",
+            //         ]
+            //     }
+            // ]
         };
     },
 
@@ -195,41 +211,6 @@ export default {
     },
 
 
-    maximiseStream(e) {
-        let elem = e.target.parentElement.previousElementSibling;
-
-        elem.requestFullscreen() || elem.mozRequestFullScreen() || elem.webkitRequestFullscreen() || elem.msRequestFullscreen();
-        // document.querySelector('#close-single-peer-btn').style.display = 'block';
-
-        // e.target.parentElement.previousElementSibling.classList.remove('remote-video');
-        // e.target.parentElement.previousElementSibling.classList.add('single-peer-video');
-
-        // //hide the other elements
-        // let remoteVideoElems = document.getElementsByClassName('remote-video');
-
-        // if(remoteVideoElems.length){
-        //     for(let i = 0; i < remoteVideoElems.length; i++){
-        //         remoteVideoElems[i].style.display = 'none';
-        //     }
-        // }
-    },
-
-
-    singleStreamToggleMute(e) {
-        if (e.target.classList.contains('fa-microphone')) {
-            e.target.parentElement.previousElementSibling.muted = true;
-            e.target.classList.add('fa-microphone-slash');
-            e.target.classList.remove('fa-microphone');
-        }
-
-        else {
-            e.target.parentElement.previousElementSibling.muted = false;
-            e.target.classList.add('fa-microphone');
-            e.target.classList.remove('fa-microphone-slash');
-        }
-    },
-
-
     saveRecordedStream(stream, data) {
         let blob = new Blob(stream, { type: 'video/webm' });
         let file = new File([blob], `${data.name}-${moment().unix()}-record.webm`);
@@ -271,22 +252,6 @@ export default {
             }
         });
     },
-
-    toggleModal(id, show) {
-        let el = document.getElementById(id);
-
-        if (show) {
-            el.style.display = 'block';
-            el.removeAttribute('aria-hidden');
-        }
-
-        else {
-            el.style.display = 'none';
-            el.setAttribute('aria-hidden', true);
-        }
-    },
-
-
 
     setLocalStream(stream, mirrorMode = true) {
         const localVidElem = document.getElementById('local');
