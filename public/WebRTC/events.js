@@ -1,4 +1,5 @@
 import helpers from './helpers.js';
+import api from './api.js';
 
 window.addEventListener('load', () => {
 
@@ -26,28 +27,16 @@ window.addEventListener('load', () => {
     if (btnEndCall !== null) {
         document.querySelector('#btn-endcall').addEventListener('click', (e) => {
             e.preventDefault();
+            let resultElement = document.getElementById('result');
+            let result = resultElement.options[resultElement.selectedIndex].value;
+            let data = {
+                id: helpers.getQString(location.href, 'id'),
+                result: result,
+            }
+            if (result == 0) alert('Mohon untuk pilih result');
+            else api.updateResultCustomer(data);
             window.history.back();
-            sessionStorage.setItem('btn', null)
         });
-    }
-
-
-    document.addEventListener('click', (e) => {
-        if (e.target && e.target.classList.contains('expand-remote-video')) {
-            helpers.maximiseStream(e);
-        }
-
-        else if (e.target && e.target.classList.contains('mute-remote-mic')) {
-            helpers.singleStreamToggleMute(e);
-        }
-    });
-
-    try {
-        document.getElementById('closeModal').addEventListener('click', () => {
-            helpers.toggleModal('recording-options-modal', false);
-        });
-    } catch (error) {
-
     }
 
 });

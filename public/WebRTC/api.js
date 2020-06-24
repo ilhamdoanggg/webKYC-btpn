@@ -9,4 +9,12 @@ export default {
             contentType: false
         });
     },
+
+    updateResultCustomer(payload) {
+        return $.ajax(`/update-customer/`, {
+            type: 'POST',
+            data: payload,
+            enctype: 'application/json'
+        });
+    }
 }

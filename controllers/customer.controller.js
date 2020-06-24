@@ -21,14 +21,8 @@ module.exports = (app) => {
     });
 
     app.post('/update-customer', (req, res) => {
-        const customer = {
-            id: req.body.id,
-            name: req.body.name,
-            customerNumber: req.body.customerNumber,
-            phoneNumber: req.body.phoneNumber,
-            result: req.body.result,
-            note: req.body.note
-        }
+        const {id, name, customerNumber, phoneNumber, activityId, result, note} = req.body;
+        const customer = {id, name, customerNumber, phoneNumber, activityId, result, note};
         customerService.update(customer)
             .then(result => {
                 const { message, isSuccess } = result;
@@ -51,22 +45,4 @@ module.exports = (app) => {
             .catch(err => console.error(err))
             .finally(() => { return res.redirect('back') })
     });
-
-    app.put('/update-customer/:id', (req, res) => {
-        const id = req.params.id;
-        const result = req.query.result;
-        const data = {
-            id,
-            result,
-        }
-
-        customerService.update(data)
-            .then(result => {
-                const { message, isSuccess } = result;
-                if (isSuccess) req.flash('messageSuccess', message);
-                else req.flash('messageErorr', message);
-            })
-            .catch(err => console.error(err))
-            .finally(() => { return res.redirect('/home') })
-    })
 }

@@ -6,6 +6,7 @@
     {{> message}}
     <form action="/update-customer" method="POST">
         <input type="text" name="id" value="{{customer.id}}" class="form-control" id="name" hidden>
+        <input type="text" name="activityId" value="1" class="form-control" id="activityId" hidden>
         <div class="form-group row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-5">
@@ -99,6 +100,7 @@
         <div class="form-group">
             <textarea class="form-control" name="note" id="catatan" rows="3"></textarea>
         </div>
+        <input type="text" name="activityId" value="0" class="form-control" id="activityId" hidden>
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-success">
             <a href="#" class="btn btn-danger" onclick="window.location.replace('/sales/offering')">Cancel</a>

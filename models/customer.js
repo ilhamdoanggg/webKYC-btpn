@@ -17,7 +17,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     activityId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
     },
     result: {
         type: Sequelize.INTEGER,

@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const Customer = require('../models').customer;
 
 exports.create = async (customer) => {
@@ -29,6 +31,16 @@ exports.findAll = async () => {
         result = null;
     })
     return result;
+}
+
+exports.findAllByFilter = async (payload) => {
+    return await Customer.findAll({
+        where: {
+            [Op.or] : [{activityId: payload.activityId}, {result: payload.result}]
+        }
+    }).then(customers => {
+        return customers;
+    })
 }
 
 exports.findById = async (id) => {
