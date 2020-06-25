@@ -20,7 +20,7 @@
     "database": "d2p8npm7r7kemk",
     "host": "ec2-52-202-22-140.compute-1.amazonaws.com",
     "dialect": "postgres",
-    "loggging": "false"
+    "logging": "false"
   },
   "aloel_env": {
     "username": "root",
