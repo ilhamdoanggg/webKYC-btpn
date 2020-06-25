@@ -1,7 +1,7 @@
 {{> header}}
 {{> welcome}}
 <div class="container">
-    <div class="row mt-5">
+    {{!-- <div class="row mt-5">
         <div class="col-sm-12 col-md-3">
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                 <div class="card-body">
@@ -46,8 +46,8 @@
                 <div class="card-footer bg-danger">Footer</div>
             </div>
         </div>
-    </div>
-    <div class="row">
+    </div> --}}
+    {{!-- <div class="row">
 
         <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7">
@@ -119,57 +119,29 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    <h5 class="my-2">Log Aktifitas</h5>
     <div class="table-responsive">
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <th scope="col">NO</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Nopen</th>
-                    <th scope="col">No telp</th>
-                    <th scope="col">PIC</th>
-                    <th scope="col">Actions date (strat)</th>
-                    <th scope="col">Actions date (end)</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Nama User</th>
+                    <th scope="col">Nama Customer</th>
+                    <th scope="col">No Akun</th>
+                    <th scope="col">Tanggal Aktifitas</th>
+                    <th scope="col">Detail Aktifitas</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">1</th>
+                    <td>Sales</td>
                     <td>Andi</td>
                     <td>1231312323</td>
-                    <td>1231312323</td>
-                    <td>SMO</td>
-                    <td>date</td>
-                    <td>date</td>
-                    <td>
-                        <button class="btn btn-link"> Offering - pre confirm </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Andi</td>
-                    <td>1231312323</td>
-                    <td>1231312323</td>
-                    <td>SMO</td>
-                    <td>date</td>
-                    <td>date</td>
-                    <td>
-                        <button class="btn btn-link"> Konfirmasi Awal </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Andi</td>
-                    <td>1231312323</td>
-                    <td>1231312323</td>
-                    <td>SMO</td>
-                    <td>date</td>
-                    <td>date</td>
-                    <td>
-                        <button class="btn btn-link"> Request SLIK Checking</button>
-                    </td>
+                    <td>25-06-2020</td>
+                    <td>Update Status</td>
                 </tr>
             </tbody>
         </table>
@@ -179,7 +151,7 @@
     <a href="/sales/audit-trail" class="btn btn-link"> <i class="far fa-eye"></i> View Audit trail</a>
 </div>
 
-  <script src="/vendors/chart.js/Chart.min.js"></script>
-  <script src="/assets/js/chart-area-demo.js"></script>
-  <script src="/assets/js/chart-pie-demo.js"></script>
+<script src="/vendors/chart.js/Chart.min.js"></script>
+<script src="/assets/js/chart-area-demo.js"></script>
+<script src="/assets/js/chart-pie-demo.js"></script>
 {{> footer}}
