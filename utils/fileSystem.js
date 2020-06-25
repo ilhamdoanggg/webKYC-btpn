@@ -5,9 +5,11 @@ const basedir = path.join(__dirname, "../");
 exports.createFolder = (folderName) => {
     let dir = basedir + 'storages/' + folderName;
     if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, function (err) {
-            if (err) console.log("Error when creating folder", err);
-        });
+        try {
+            fs.mkdirSync(dir);
+        } catch (err) {
+            if (err.code !== 'EEXIST') throw err
+        }
     }
     return dir;
 }
