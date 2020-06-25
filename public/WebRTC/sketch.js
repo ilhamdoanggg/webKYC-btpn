@@ -3,6 +3,8 @@ let color = '#000';
 let strokeWidth = 2;
 let cv;
 let canvas;
+let baseImage;
+let context;
 
 let socket = io('/stream');
 const room = getQString(location.href, 'id');
@@ -13,6 +15,7 @@ function setup() {
     cv = createCanvas(window.innerWidth / 1.5, window.innerHeight)
     canvas = document.getElementById('defaultCanvas0')
     canvas.classList.add('border');
+    context = canvas.getContext('2d');
     document.getElementById('content-canvas').appendChild(canvas)
 
 
@@ -33,8 +36,12 @@ function setup() {
         var urlCreator = window.URL || window.webkitURL;
         var imageUrl = urlCreator.createObjectURL(blob);
 
-        canvas.style.backgroundImage = `url('${imageUrl}')`;
-        canvas.style.backgroundRepeat = 'no-repeat';
+        baseImage = new Image();
+        baseImage.src = imageUrl;
+
+        baseImage.onload = function () {
+            context.drawImage(baseImage, 0, 0, window.innerWidth / 2, window.innerHeight);
+        }
     })
 }
 
@@ -97,21 +104,18 @@ try {
     const btnUploadImg = document.getElementById('btn-upload-img');
     btnUploadImg.addEventListener('click', (e) => {
         e.preventDefault();
-        let context = canvas.getContext('2d');
         let inputFile = document.createElement('input');
         inputFile.type = 'file';
         inputFile.accept = "image/x-png,image/jpeg";
         inputFile.click();
         inputFile.onchange = e => {
             const file = e.target.files[0];
-
-            let baseImage = new Image();
+            baseImage = new Image();
             baseImage.src = `${URL.createObjectURL(file)}`;
 
             baseImage.onload = function () {
                 context.drawImage(baseImage, 0, 0, window.innerWidth / 2, window.innerHeight);
             }
-
             socket.emit('bg-canvas', file); // emit file
         }
     })
