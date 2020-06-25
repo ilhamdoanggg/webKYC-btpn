@@ -348,10 +348,10 @@ window.addEventListener('load', () => {
 
             var attachment = '<a href="' + url + '" target="_blank" download="' + file.filename + '">Download: <b>' + file.filename + '</b></a>';
             if (file.filename.match(/\.jpg|\.png|\.jpeg|\.gif/gi)) {
-                attachment += '<br><img crossOrigin="anonymous" src="' + url + '">';
+                attachment += '<br><img crossOrigin="anonymous" width="100%" src="' + url + '">';
             } else if (file.filename.match(/\.wav|\.mp3/gi)) {
                 attachment += '<br><audio src="' + url + '" controls></audio>';
-            } else if (file.filename.match(/\.pdf|\.js|\.txt|\.sh/gi)) {
+            } else if (file.filename.match(/\.pdf|\.sh/gi)) {
                 attachment += '<iframe class="inline-iframe" src="' + url + '"></iframe></a>';
             }
 

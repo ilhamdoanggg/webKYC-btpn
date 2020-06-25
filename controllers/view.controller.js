@@ -84,7 +84,7 @@ module.exports = (app) => {
       })
   });
 
-  app.get('/sales/videocall-confirmation', (req, res) => {
+  app.get('/sales/videocall-confirmation', isLoggedIn, (req, res) => {
     const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
@@ -133,7 +133,7 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/sales/videocall-verification', checkIsInRole(ROLES.Manager), isLoggedIn, (req, res) => {
+  app.get('/sales/videocall-verification', isLoggedIn, checkIsInRole(ROLES.Manager), isLoggedIn, (req, res) => {
     const customerId = req.query.id;
     customerService.findById(customerId)
       .then(customer => {
