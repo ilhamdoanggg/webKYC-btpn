@@ -150,8 +150,8 @@
     background-repeat: no-repeat;
 } */
 
-#nav-pen{
-    overflow-x: scroll;
+#content-canvas{
+    overflow: scroll;
 }
 
 

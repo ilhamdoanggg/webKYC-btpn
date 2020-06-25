@@ -10,10 +10,11 @@ const username = sessionStorage.getItem('username');
 
 function setup() {
     // Creating canvas
-    cv = createCanvas(600, 765)
+    cv = createCanvas(window.innerWidth / 1.5, window.innerHeight)
     canvas = document.getElementById('defaultCanvas0')
     canvas.classList.add('border');
     document.getElementById('content-canvas').appendChild(canvas)
+
 
     // Callback function
     socket.on('mouse', data => {
@@ -96,6 +97,7 @@ try {
     const btnUploadImg = document.getElementById('btn-upload-img');
     btnUploadImg.addEventListener('click', (e) => {
         e.preventDefault();
+        let context = canvas.getContext('2d');
         let inputFile = document.createElement('input');
         inputFile.type = 'file';
         inputFile.accept = "image/x-png,image/jpeg";
@@ -103,10 +105,14 @@ try {
         inputFile.onchange = e => {
             const file = e.target.files[0];
 
-            socket.emit('bg-canvas', file); // emit file
+            let baseImage = new Image();
+            baseImage.src = `${URL.createObjectURL(file)}`;
 
-            canvas.style.backgroundImage = `url('${URL.createObjectURL(file)}')`;
-            canvas.style.backgroundRepeat = 'no-repeat';
+            baseImage.onload = function () {
+                context.drawImage(baseImage, 0, 0, window.innerWidth / 2, window.innerHeight);
+            }
+
+            socket.emit('bg-canvas', file); // emit file
         }
     })
 } catch (error) { }
